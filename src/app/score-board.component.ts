@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./score-board.component.css']
 })
 
-export class ScoreBoard {   }
+export class ScoreBoard {
+    score = 42;
+    matchesRemaining = 12;
+}

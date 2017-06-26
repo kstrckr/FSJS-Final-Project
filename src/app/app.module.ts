@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { GameBoard } from './game-board.component';
 import { ScoreBoard } from './score-board.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
