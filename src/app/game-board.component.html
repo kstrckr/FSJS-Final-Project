@@ -1,5 +1,5 @@
 <div class="game-board">
   <!--  <h1>Game Board Goes Here</h1> -->
-        <div *ngFor="let piece of pieces"  class="game-piece">{{piece.id}}</div>
+        <div *ngFor="let piece of pieces"  class="game-piece" [innerHTML]="piece.unicode"></div>
     
 </div>

@@ -16,7 +16,7 @@ export class GameBoardComponent implements OnInit {
     constructor (private gameBoardBuildService: GameBoardBuildService) {}
 
     buildBoard(): void {
-        this.gameBoardBuildService.getPiecesSlowly().then(pieces => this.pieces = pieces);
+        this.gameBoardBuildService.getPieces().then(pieces => this.pieces = pieces);
     }
 
     ngOnInit(): void {
