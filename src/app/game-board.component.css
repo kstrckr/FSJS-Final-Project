@@ -18,11 +18,14 @@
     list-style: none;
     border-style: solid;
     border-width: 2px;
+    border-color: black;
     margin: 5px auto;
     box-shadow: 3px 3px 0 0 grey;
+    color: rgba(0,0,0,0);
 
 }
 
 .game-piece:hover {
     background-color: lightgray;
+    color: rgba(0,0,0,1);
 }
