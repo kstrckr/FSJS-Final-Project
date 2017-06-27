@@ -1,20 +1,26 @@
 .game-board {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     border-style: solid;
-    border-width: 1px;
+    border-width: 4px;
     width: 80%;
     height: 50%;
     margin: 0 auto;
+    padding: 1.5% 0;
+    box-shadow: inset 4px 4px 0 0 grey;
 }
 
 
 .game-piece {
-    padding: 10%;
-    margin: auto;
-    height: 15%;
     width: 25%;
+    padding: 8% 0;
     list-style: none;
+    border-style: solid;
+    border-width: 2px;
+    margin: 5px auto;
+    box-shadow: 3px 3px 0 0 grey;
+
 }
 
 .game-piece:hover {
