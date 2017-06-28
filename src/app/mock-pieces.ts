@@ -1,9 +1,9 @@
 import { GamePiece } from './game-piece';
 
 export const PIECES: GamePiece[] = [
-    { id: 1, unicode: '&#1100' },
-    { id: 2, unicode: '&#1106' },
-    { id: 3, unicode: '&#1064' },
+    { id: 1, unicode: "&#x3C8" },
+    { id: 2, unicode: "&#x39E" },
+    { id: 3, unicode: "&#x456" },
     { id: 4, unicode: '&#x45B' },
     { id: 5, unicode: '&#x443' },
     { id: 6, unicode: '&#x45E' },
