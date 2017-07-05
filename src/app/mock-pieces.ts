@@ -1,3 +1,4 @@
+/*
 import { GamePiece } from './game-piece';
 
 export const PIECES: GamePiece[] = [
@@ -14,3 +15,4 @@ export const PIECES: GamePiece[] = [
     { id: 11, unicode: '&#1112' },
     { id: 12, unicode: '&#1029' },
 ]
+*/

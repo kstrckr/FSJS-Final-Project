@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import{ GamePiece } from './game-piece';
-import { PIECES } from './mock-pieces';
+//import { PIECES } from './mock-pieces';
 
 
 @Injectable()
@@ -9,7 +9,9 @@ import { PIECES } from './mock-pieces';
 export class MatchCheckService {
     //checkMatch(): void {}
 
+/*
     getPieces(): Promise<GamePiece[]> {
         return Promise.resolve(PIECES);
     }
+*/
 }
