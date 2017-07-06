@@ -17,7 +17,6 @@ import { GameBoardComponent } from          './game-board.component';
   imports: [
     BrowserModule,
     HttpModule,
-   // HttpModule,
    // JsonpModule
   ],
   providers: [],

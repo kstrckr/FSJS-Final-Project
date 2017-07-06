@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GamePiece} from './game-piece';
+//import { GamePiece} from './game-piece';
 import { GameBoardBuildService } from './game-board-buid.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { GameBoardBuildService } from './game-board-buid.service';
 
 export class GameBoardComponent implements OnInit {
 
-    pieces: GamePiece[];
+    pieces: string[];
 
     constructor (private gameBoardBuildService: GameBoardBuildService) {}
 
