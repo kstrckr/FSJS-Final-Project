@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 //import { GamePiece} from './game-piece';
 import { GameBoardBuildService } from './game-board-buid.service';
+import { MatchCheckService } from './match-check.service';
 
 @Component({
     selector: 'game-board',
     templateUrl: './game-board.component.html',
     styleUrls: ['./game-board.component.css'],
-    providers: [GameBoardBuildService]
+    providers: [
+        GameBoardBuildService,
+        MatchCheckService
+        ]
 })
 
 export class GameBoardComponent implements OnInit {

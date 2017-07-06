@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
-import{ GamePiece } from './game-piece';
-//import { PIECES } from './mock-pieces';
+
+
 
 
 @Injectable()
 
 export class MatchCheckService {
-    //checkMatch(): void {}
 
+    tileIndex: string;
+
+    constructor( private http:Http) { };
+
+//wip--
 /*
-    getPieces(): Promise<GamePiece[]> {
-        return Promise.resolve(PIECES);
+    getTileIcon(): Promise<string> {
+        return this.http.get()
     }
 */
 }
