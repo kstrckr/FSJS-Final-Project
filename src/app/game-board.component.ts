@@ -11,19 +11,29 @@ import { GameBoardBuildService } from './game-board-buid.service';
 
 export class GameBoardComponent implements OnInit {
 
-    pieces: string[];
+    numOfPieces: number;
+    boardId: string;
+    pieces: number[] = [];
 
     constructor (private gameBoardBuildService: GameBoardBuildService) {}
 
-    buildBoard(): void {
-        this.gameBoardBuildService.getPieces().then(pieces => {
-            this.pieces = pieces
-            console.log(this.pieces);
-        });
+    getBoardId(): void {
+        this.gameBoardBuildService.getPieces()
+                .then(boardId => {
+                this.boardId = boardId;
+                this.numOfPieces = this.gameBoardBuildService.numOfPieces;
+                console.log(this.boardId);
+                return (this.numOfPieces)
+            })
+            .then(pieces => {
+                for (let i = 0; i < pieces; i++){
+                    this.pieces.push(i);
+                }
+            });
     }
 
     ngOnInit(): void {
-        this.buildBoard();
+        this.getBoardId();
     }
 
 }

@@ -1,9 +1,8 @@
-<div class="game-board">
+<div class="game-board" id={{boardId}}>
   <!--  <h1>Game Board Goes Here</h1> -->
         <div *ngFor="let piece of pieces; let i = index;"  
         class="game-piece" 
-        id="{{i}}"
-        
+        id={{piece}}
         >
          <p></p>
         </div>
