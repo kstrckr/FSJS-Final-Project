@@ -1,6 +1,6 @@
 import { Injectable } from  '@angular/core';
 import { Http } from '@angular/http'
-//import { GamePiece } from    './game-piece';
+import { GameBoard } from    './game-board';
 import 'rxjs/add/operator/toPromise';
 //import { PIECES } from      './mock-pieces';
 
@@ -11,17 +11,17 @@ export class GameBoardBuildService {
 
     url: string = "http://localhost:3000/api/method"
     numOfPieces: number;
+    gameBoard: GameBoard;
 
     constructor( private http: Http) { };
 
-    getPieces(): Promise<string> {
+    getPieces(): Promise<GameBoard> {
 
         return this.http.get(this.url)
             .toPromise()
             .then(res => {
-                let boardId = res.json().id;
-                this.numOfPieces = res.json().length;
-                return boardId as string;
+                this.gameBoard = res.json() as GameBoard;
+                return this.gameBoard;
             })
     }
         

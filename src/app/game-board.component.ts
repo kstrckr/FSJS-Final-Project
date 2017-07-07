@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { GamePiece} from './game-piece';
+import { GameBoard } from './game-board';
 import { GameBoardBuildService } from './game-board-buid.service';
 import { MatchCheckService } from './match-check.service';
 
@@ -15,22 +15,23 @@ import { MatchCheckService } from './match-check.service';
 
 export class GameBoardComponent implements OnInit {
 
-    numOfPieces: number;
-    boardId: string;
+    gameBoard: GameBoard;
+    id: string;
     pieces: number[] = [];
 
     constructor (private gameBoardBuildService: GameBoardBuildService) {}
 
     getBoardId(): void {
         this.gameBoardBuildService.getPieces()
-                .then(boardId => {
-                this.boardId = boardId;
-                this.numOfPieces = this.gameBoardBuildService.numOfPieces;
-                console.log(this.boardId);
-                return (this.numOfPieces)
+                .then(gameBoard => {
+                    this.gameBoard = gameBoard;
+                    this.id = gameBoard.id;
+                console.log(this.gameBoard);
+                
             })
+            
             .then(pieces => {
-                for (let i = 0; i < pieces; i++){
+                for (let i = 0; i < this.gameBoard.length; i++){
                     this.pieces.push(i);
                 }
             });
