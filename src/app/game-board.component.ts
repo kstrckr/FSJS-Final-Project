@@ -19,7 +19,8 @@ export class GameBoardComponent implements OnInit {
     id: string;
     pieces: number[] = [];
 
-    constructor (private gameBoardBuildService: GameBoardBuildService) {}
+    constructor (private gameBoardBuildService: GameBoardBuildService, 
+    private matchCheckService: MatchCheckService) {}
 
     getBoardId(): void {
         this.gameBoardBuildService.getPieces()
@@ -36,6 +37,17 @@ export class GameBoardComponent implements OnInit {
                 }
             });
     }
+
+
+    getTileValue(event: any): void {
+        
+        this.matchCheckService.getTile(this.id, event.target.id)
+            .then(tileValue => {
+                event.srcElement.innerHTML = tileValue;
+            })
+            
+    }
+    
 
     ngOnInit(): void {
         this.getBoardId();

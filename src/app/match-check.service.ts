@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 
 
@@ -11,12 +12,20 @@ export class MatchCheckService {
 
     tileIndex: string;
 
-    constructor( private http:Http) { };
+    constructor( private http: Http) { };
 
 //wip--
-/*
-    getTileIcon(): Promise<string> {
-        return this.http.get()
+
+    getTile(id, a): Promise<string> {
+        let url = "http://localhost:3000"
+        let fullUrl = `${url}/api/checkmatch/${id}/${a}`
+        console.log(id);
+        return this.http.get(fullUrl)
+            .toPromise()
+            .then(res => {
+                return res.json() as string;
+                }
+            )
     }
-*/
+
 }
