@@ -5,4 +5,7 @@
   </p>
 </div>
 <score-board [score]="currentScore"></score-board>
-<game-board (moveMade)="incrementScore()"></game-board>
+<game-board 
+  (moveMade)="incrementScore()"
+  (sendValue)="storeValue($event)"
+></game-board>

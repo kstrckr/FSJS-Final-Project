@@ -11,6 +11,7 @@ import { GameBoardComponent } from './game-board.component';
 export class AppComponent implements OnInit {
   title = 'Match Master';
   currentScore: number;
+  lastTwoMoves: string[] = [];
 
   ngOnInit(){
     this.currentScore = 0;
@@ -18,5 +19,11 @@ export class AppComponent implements OnInit {
 
   incrementScore(){
     this.currentScore++
+  }
+
+//PROBABLY REDUDANT, MOVE BACK TO GAME-BOARD.COMPOENT
+  storeValue(event){
+    this.lastTwoMoves.push(event)
+    console.log(this.lastTwoMoves);
   }
 }
