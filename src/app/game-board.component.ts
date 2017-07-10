@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GameBoard } from './game-board';
 import { GameBoardBuildService } from './game-board-buid.service';
 import { MatchCheckService } from './match-check.service';
+
+
 
 @Component({
     selector: 'game-board',
@@ -15,9 +17,12 @@ import { MatchCheckService } from './match-check.service';
 
 export class GameBoardComponent implements OnInit {
 
+    @Output() moveMade: EventEmitter<number> = new EventEmitter<number>();
+
     gameBoard: GameBoard;
     id: string;
     pieces: number[] = [];
+    selected: string[]; 
 
     constructor (private gameBoardBuildService: GameBoardBuildService, 
     private matchCheckService: MatchCheckService) {}
@@ -45,12 +50,16 @@ export class GameBoardComponent implements OnInit {
             .then(tileValue => {
                 event.srcElement.innerHTML = tileValue;
             })
-            
+
+            this.moveMade.emit(1);
+
+        
     }
     
 
     ngOnInit(): void {
         this.getBoardId();
     }
+
 
 }

@@ -4,5 +4,5 @@
     Welcome to {{title}}!!
   </p>
 </div>
-<score-board></score-board>
-<game-board></game-board>
+<score-board [score]="currentScore"></score-board>
+<game-board (moveMade)="incrementScore()"></game-board>
