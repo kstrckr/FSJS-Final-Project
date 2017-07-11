@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ScoreBoard } from './score-board.component';
+import { Component } from '@angular/core';
 import { GameBoardComponent } from './game-board.component';
+import { ScoreBoard } from './score-board.component';
 
 @Component({
   selector: 'app-root',
@@ -8,22 +8,6 @@ import { GameBoardComponent } from './game-board.component';
   styleUrls: ['./app.component.css'],
   
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
   title = 'Match Master';
-  currentScore: number;
-  lastTwoMoves: string[] = [];
-
-  ngOnInit(){
-    this.currentScore = 0;
-  }
-
-  incrementScore(){
-    this.currentScore++
-  }
-
-//PROBABLY REDUDANT, MOVE BACK TO GAME-BOARD.COMPOENT
-  storeValue(event){
-    this.lastTwoMoves.push(event)
-    console.log(this.lastTwoMoves);
-  }
 }

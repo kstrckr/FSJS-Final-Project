@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 
@@ -8,8 +9,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 
-export class MatchCheckService {
-
+export class MatchCheckService implements OnInit {
+    currentScore: BehaviorSubject<number> = new BehaviorSubject(0);
+    curentScore$ = this.currentScore.asObservable();
+    lastTwoMoves: string[] = [];
     tileIndex: string;
 
     constructor( private http: Http) { };
@@ -31,4 +34,25 @@ export class MatchCheckService {
     matchCheck(){
         
     }
+
+    initialScore(): void {         
+         //console.log(this.currentScore);
+    }
+
+    incrementScore(){
+        this.currentScore.next(this.currentScore.value + 1);
+    }
+
+    returnScore(): Observable<any> {
+        return this.currentScore.asObservable();
+    }
+
+      storeValue(event){
+        this.lastTwoMoves.push(event)
+        console.log(this.lastTwoMoves);
+  }
+
+  ngOnInit():void {
+     
+  }
 }
