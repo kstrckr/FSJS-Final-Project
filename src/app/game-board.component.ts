@@ -53,6 +53,7 @@ export class GameBoardComponent implements OnInit {
     }
 
     setNewScore():void {
+        console.log("click");
         this.matchCheckService.setScore(1);
     }
     

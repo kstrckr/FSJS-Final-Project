@@ -24,13 +24,16 @@ export class ScoreBoard implements OnInit {
     }
 
     getScore() {
-        
+        this.matchCheckService.setScore(1);
     }
     
     ngOnInit():void {
-      this.matchCheckService.currentScore.subscribe(score => {
-          this.score = score;
-          console.log("subscribed")
+        
+        this.matchCheckService.getScore().subscribe(value => {
+            this.score = value;
         })
+        
+        
+        
        }
     }
