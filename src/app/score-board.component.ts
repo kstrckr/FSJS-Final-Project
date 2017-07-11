@@ -12,19 +12,25 @@ import { Subscription } from 'rxjs/Subscription';
 })
 
 export class ScoreBoard implements OnInit {
+    
+    
+    
     matchesRemaining = 12;
-    score: number = 666;
+    score: number = 5;
     subscription: Subscription;
 
-    constructor(private matchCheckService: MatchCheckService) {
-     
+    constructor(private matchCheckService: MatchCheckService) { 
+        
     }
 
-    
+    getScore() {
+        
+    }
     
     ngOnInit():void {
-       this.subscription = this.matchCheckService.curentScore$.subscribe(res => {
-           this.score = res
-       })
+      this.matchCheckService.currentScore.subscribe(score => {
+          this.score = score;
+          console.log("subscribed")
+        })
+       }
     }
-}

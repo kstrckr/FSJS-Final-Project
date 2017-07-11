@@ -50,8 +50,10 @@ export class GameBoardComponent implements OnInit {
                 event.srcElement.innerHTML = tileValue;
             })
 
-            this.matchCheckService.incrementScore();
-            console.log(this.matchCheckService.currentScore)
+    }
+
+    setNewScore():void {
+        this.matchCheckService.setScore(1);
     }
     
 

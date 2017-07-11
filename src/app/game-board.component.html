@@ -2,6 +2,7 @@
   <!--  <h1>Game Board Goes Here</h1> -->
         <div *ngFor="let piece of pieces; let i = index;"  
         (click)="getTileValue($event)"
+        (click)="setNewScore()"
         class="game-piece" 
         id={{piece}}
         >
