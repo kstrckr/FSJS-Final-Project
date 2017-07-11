@@ -10,8 +10,7 @@ import { MatchCheckService } from './match-check.service';
     templateUrl: './game-board.component.html',
     styleUrls: ['./game-board.component.css'],
     providers: [
-        GameBoardBuildService,
-        MatchCheckService
+        GameBoardBuildService
         ]
 })
 
