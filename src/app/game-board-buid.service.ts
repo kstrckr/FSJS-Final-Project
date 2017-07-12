@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 export class GameBoardBuildService {
 
-    url: string = "http://localhost:3000/api/method"
+    url: string = 'http://localhost:3000/api/method'
     numOfPieces: number;
     gameBoard: GameBoard;
 
@@ -23,12 +23,5 @@ export class GameBoardBuildService {
                 return this.gameBoard;
             })
     }
-
-/*
-    getPiecesSlowly(): Promise<GamePiece[]> {
-        return new Promise(resolve => {
-            setTimeout(() => resolve(this.getPieces()), 2000)
-        });
-    }
-*/
 }
+

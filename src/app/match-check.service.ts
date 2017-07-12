@@ -17,15 +17,14 @@ export class MatchCheckService implements OnInit {
 
     constructor( private http: Http) {};
 
-// wip--
-
     getTile(id, a): Promise<string> {
-        let url = 'http://localhost:3000'
+        let url = "http://localhost:3000"
         let fullUrl = `${url}/api/checkmatch/${id}/${a}`
         console.log(id);
         return this.http.get(fullUrl)
             .toPromise()
             .then(res => {
+                console.log(res);
                 return res.json() as string;
                 }
             )
@@ -34,13 +33,15 @@ export class MatchCheckService implements OnInit {
     storeValue(event) {
         this.lastTwoMoves.push(event)
         console.log(this.lastTwoMoves);
-  }
+    }
 
     setScore(increment): void {
         this.currentScore += increment;
         this.currentScoreSource.next(this.currentScore);
         console.log(this.currentScore);
     }
-  ngOnInit(): void {
-  }
+
+    ngOnInit(): void {
+    }
+
 }

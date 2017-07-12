@@ -23,7 +23,6 @@ export class ScoreBoardComponent implements OnInit {
     ngOnInit(): void {
 
         this.matchCheckService.currentScore$.subscribe(value => {
-            console.log('event next', value);
             this.score = value;
         });
        }
