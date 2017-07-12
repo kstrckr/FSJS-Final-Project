@@ -6,7 +6,7 @@ import { MatchCheckService } from './match-check.service';
 
 
 @Component({
-    selector: 'game-board',
+    selector: 'app-game-board',
     templateUrl: './game-board.component.html',
     styleUrls: ['./game-board.component.css'],
     providers: [
@@ -31,9 +31,7 @@ export class GameBoardComponent implements OnInit {
                     this.gameBoard = gameBoard;
                     this.id = gameBoard.id;
                 console.log(this.gameBoard);
-                
             })
-            
             .then(pieces => {
                 for (let i = 0; i < this.gameBoard.length; i++){
                     this.pieces.push(i);
@@ -43,7 +41,6 @@ export class GameBoardComponent implements OnInit {
 
 
     getTileValue(event: any): void {
-        
         this.matchCheckService.getTile(this.id, event.target.id)
             .then(tileValue => {
                 event.srcElement.innerHTML = tileValue;
@@ -51,15 +48,12 @@ export class GameBoardComponent implements OnInit {
 
     }
 
-    setNewScore():void {
-        console.log("click");
+    setNewScore(): void {
+        console.log('click');
         this.matchCheckService.setScore(1);
     }
-    
 
     ngOnInit(): void {
         this.getBoardId();
     }
-
-
 }

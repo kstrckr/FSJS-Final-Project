@@ -1,6 +1,6 @@
-import { Injectable } from  '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http'
-import { GameBoard } from    './game-board';
+import { GameBoard } from './game-board';
 import 'rxjs/add/operator/toPromise';
 
 
@@ -23,7 +23,6 @@ export class GameBoardBuildService {
                 return this.gameBoard;
             })
     }
-        
 
 /*
     getPiecesSlowly(): Promise<GamePiece[]> {

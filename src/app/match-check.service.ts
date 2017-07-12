@@ -1,16 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 
 export class MatchCheckService implements OnInit {
-
-
-    constructor( private http: Http) { 
-
-    };
 
     currentScore: number = 0;
     currentScoreSource: BehaviorSubject<number> = new BehaviorSubject(this.currentScore);
@@ -19,10 +15,12 @@ export class MatchCheckService implements OnInit {
     lastTwoMoves: string[] = [];
     tileIndex: string;
 
-//wip--
+    constructor( private http: Http) {};
+
+// wip--
 
     getTile(id, a): Promise<string> {
-        let url = "http://localhost:3000"
+        let url = 'http://localhost:3000'
         let fullUrl = `${url}/api/checkmatch/${id}/${a}`
         console.log(id);
         return this.http.get(fullUrl)
@@ -30,10 +28,10 @@ export class MatchCheckService implements OnInit {
             .then(res => {
                 return res.json() as string;
                 }
-            )        
+            )
     }
 
-    storeValue(event){
+    storeValue(event) {
         this.lastTwoMoves.push(event)
         console.log(this.lastTwoMoves);
   }
@@ -43,8 +41,6 @@ export class MatchCheckService implements OnInit {
         this.currentScoreSource.next(this.currentScore);
         console.log(this.currentScore);
     }
-    
-  ngOnInit():void {
-     
+  ngOnInit(): void {
   }
 }
