@@ -43,7 +43,6 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
                     this.pieces.push(pieceStatus);
                 }
             });
-            console.log(this.pieces);
     }
 
     getTileValue(event: any): void {

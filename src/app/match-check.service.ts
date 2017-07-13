@@ -44,12 +44,7 @@ export class MatchCheckService implements OnInit {
             return piece.status === 'selected'
         })
 
-<<<<<<< HEAD
-        console.log(selectedPieces);
-        if (selectedPieces.length < 2) {
-=======
         if (selectedPieces.length < 1) {
->>>>>>> implement-viewChildren
             return matchState;
         } else if (selectedPieces.length === 2) {
             if (selectedPieces[0].value === selectedPieces[1].value) {
