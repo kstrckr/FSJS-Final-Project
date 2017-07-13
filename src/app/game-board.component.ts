@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { AfterViewInit, QueryList, ViewChildren} from '@angular/core';
+import { AfterViewInit, QueryList, ViewChildren, ElementRef} from '@angular/core';
 import { GameBoard } from './game-board';
 import { PieceStatus } from './piece-list';
 import { GameBoardBuildService } from './game-board-buid.service';
@@ -16,14 +16,13 @@ import { MatchCheckService } from './match-check.service';
 
 export class GameBoardComponent implements OnInit, AfterViewInit {
 
-     @ViewChildren('gamePiece') gamePieces: QueryList<object>
+     @ViewChildren('gamePiece') gamePieces: QueryList<ElementRef>
 
     gameBoard: GameBoard;
     id: string;
     pieces: PieceStatus[] = [];
-    piecesInDom: object[];
+    piecesInDom: ElementRef[];
     selected: string[];
-    innerValue: string = &equiv;
 
     constructor (private gameBoardBuildService: GameBoardBuildService,
     private matchCheckService: MatchCheckService) {}
@@ -62,17 +61,18 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
             let matchState = this.matchCheckService.matchCheck(this.pieces);
             console.log(matchState);
             if (matchState.match === true) {
-                console.log("Match!")
+                console.log('Match!')
                 this.pieces.forEach((piece) => {
                     if (piece.status === 'selected') {
                         piece.status = 'matched';
                     }
                 });
             } else if (matchState.pair === true && matchState.match === false) {
-                console.log("miss");
+                console.log('miss');
                  this.pieces.forEach((piece) => {
                     if (piece.status === 'selected') {
                         piece.status = 'unselected';
+                        this.piecesInDom[piece.pieceId].nativeElement.innerHTML = ' ';
                     }
                 });
             } else {
@@ -93,7 +93,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
          this.gamePieces.changes.subscribe(
              (r) => {
                 this.piecesInDom = this.gamePieces.toArray();
-                console.log(this.piecesInDom[0])
+                // this.piecesInDom[0].nativeElement.innerHTML = '!'
                 });
         }
 }
