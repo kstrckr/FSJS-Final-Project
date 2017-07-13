@@ -43,6 +43,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
                     this.pieces.push(pieceStatus);
                 }
             });
+            console.log(this.pieces);
     }
 
     getTileValue(event: any): void {
@@ -51,24 +52,21 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
             return null;
         } else {
             this.pieces[clickedPiece.pieceId].status = 'selected';
-            // console.log(this.pieces[event.target.id]);
             this.matchCheckService.getTileContents(this.id, event.target.id)
                 .then(tileValue => {
                     clickedPiece.value = tileValue;
                     event.srcElement.innerHTML = tileValue;
                 })
             this.setNewScore();
+
             let matchState = this.matchCheckService.matchCheck(this.pieces);
-            console.log(matchState);
             if (matchState.match === true) {
-                console.log('Match!')
                 this.pieces.forEach((piece) => {
                     if (piece.status === 'selected') {
                         piece.status = 'matched';
                     }
                 });
             } else if (matchState.pair === true && matchState.match === false) {
-                console.log('miss');
                  this.pieces.forEach((piece) => {
                     if (piece.status === 'selected') {
                         piece.status = 'unselected';
