@@ -44,8 +44,7 @@ export class MatchCheckService implements OnInit {
             return piece.status === 'selected'
         })
 
-        console.log(selectedPieces);
-        if (selectedPieces.length > 2) {
+        if (selectedPieces.length < 2) {
             return matchState;
         } else if (selectedPieces.length === 2) {
             console.log(selectedPieces)
