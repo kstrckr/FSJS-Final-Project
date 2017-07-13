@@ -1,10 +1,9 @@
 import { Component, OnInit} from '@angular/core';
+import { AfterViewInit, QueryList, ViewChildren, ElementRef} from '@angular/core';
 import { GameBoard } from './game-board';
 import { PieceStatus } from './piece-list';
 import { GameBoardBuildService } from './game-board-buid.service';
 import { MatchCheckService } from './match-check.service';
-
-
 
 @Component({
     selector: 'app-game-board',
@@ -15,12 +14,14 @@ import { MatchCheckService } from './match-check.service';
         ]
 })
 
-export class GameBoardComponent implements OnInit {
+export class GameBoardComponent implements OnInit, AfterViewInit {
 
+     @ViewChildren('gamePiece') gamePieces: QueryList<ElementRef>
 
     gameBoard: GameBoard;
     id: string;
     pieces: PieceStatus[] = [];
+    piecesInDom: ElementRef[];
     selected: string[];
 
     constructor (private gameBoardBuildService: GameBoardBuildService,
@@ -42,6 +43,7 @@ export class GameBoardComponent implements OnInit {
                     this.pieces.push(pieceStatus);
                 }
             });
+            console.log(this.pieces);
     }
 
     getTileValue(event: any): void {
@@ -50,27 +52,25 @@ export class GameBoardComponent implements OnInit {
             return null;
         } else {
             this.pieces[clickedPiece.pieceId].status = 'selected';
-            // console.log(this.pieces[event.target.id]);
             this.matchCheckService.getTileContents(this.id, event.target.id)
                 .then(tileValue => {
                     clickedPiece.value = tileValue;
                     event.srcElement.innerHTML = tileValue;
                 })
             this.setNewScore();
+
             let matchState = this.matchCheckService.matchCheck(this.pieces);
-            console.log(matchState);
             if (matchState.match === true) {
-                console.log("Match!")
                 this.pieces.forEach((piece) => {
                     if (piece.status === 'selected') {
                         piece.status = 'matched';
                     }
                 });
             } else if (matchState.pair === true && matchState.match === false) {
-                console.log("miss");
                  this.pieces.forEach((piece) => {
                     if (piece.status === 'selected') {
                         piece.status = 'unselected';
+                        this.piecesInDom[piece.pieceId].nativeElement.innerHTML = ' ';
                     }
                 });
             } else {
@@ -86,4 +86,12 @@ export class GameBoardComponent implements OnInit {
     ngOnInit(): void {
         this.getBoardId();
     }
+
+    ngAfterViewInit() {
+         this.gamePieces.changes.subscribe(
+             (r) => {
+                this.piecesInDom = this.gamePieces.toArray();
+                // this.piecesInDom[0].nativeElement.innerHTML = '!'
+                });
+        }
 }

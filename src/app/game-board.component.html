@@ -1,6 +1,5 @@
 <div class="game-board" id={{id}}>
-  <!--  <h1>Game Board Goes Here</h1> -->
-        <div *ngFor="let piece of pieces; let i = index;"  
+        <div #gamePiece *ngFor="let piece of pieces; let i = index;"  
         (click)="getTileValue($event)"
         class="game-piece" 
         id={{piece.pieceId}}
