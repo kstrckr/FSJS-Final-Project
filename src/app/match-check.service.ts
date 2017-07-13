@@ -40,7 +40,7 @@ export class MatchCheckService implements OnInit {
             match: false,
             pair: false
         }
-        let selectedPieces = pieces.filter(function(piece){
+        let selectedPieces = pieces.filter(function(piece) {
             return piece.status === 'selected'
         })
 
@@ -48,7 +48,7 @@ export class MatchCheckService implements OnInit {
             return matchState;
         } else if (selectedPieces.length === 2) {
             console.log(selectedPieces)
-            if (selectedPieces[0].value === selectedPieces[1].value){
+            if (selectedPieces[0].value === selectedPieces[1].value) {
                 matchState.match = true;
                 matchState.pair = true;
             } else {

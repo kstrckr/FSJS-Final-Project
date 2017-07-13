@@ -1,10 +1,9 @@
 import { Component, OnInit} from '@angular/core';
+import { AfterViewInit, QueryList, ViewChildren} from '@angular/core';
 import { GameBoard } from './game-board';
 import { PieceStatus } from './piece-list';
 import { GameBoardBuildService } from './game-board-buid.service';
 import { MatchCheckService } from './match-check.service';
-
-
 
 @Component({
     selector: 'app-game-board',
@@ -15,13 +14,16 @@ import { MatchCheckService } from './match-check.service';
         ]
 })
 
-export class GameBoardComponent implements OnInit {
+export class GameBoardComponent implements OnInit, AfterViewInit {
 
+     @ViewChildren('gamePiece') gamePieces: QueryList<object>
 
     gameBoard: GameBoard;
     id: string;
     pieces: PieceStatus[] = [];
+    piecesInDom: object[];
     selected: string[];
+    innerValue: string = &equiv;
 
     constructor (private gameBoardBuildService: GameBoardBuildService,
     private matchCheckService: MatchCheckService) {}
@@ -86,4 +88,12 @@ export class GameBoardComponent implements OnInit {
     ngOnInit(): void {
         this.getBoardId();
     }
+
+    ngAfterViewInit() {
+         this.gamePieces.changes.subscribe(
+             (r) => {
+                this.piecesInDom = this.gamePieces.toArray();
+                console.log(this.piecesInDom[0])
+                });
+        }
 }
