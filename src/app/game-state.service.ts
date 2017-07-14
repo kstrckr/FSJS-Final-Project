@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import 'rxjs/add/operator/toPromise';
 
-import { PieceStatus } from './piece-list';
+import { PieceState } from './piece-list';
 
 @Injectable()
 
@@ -13,8 +13,8 @@ export class GameStateService implements OnInit {
     currentScore: number = 0;
     currentScoreSource: BehaviorSubject<number> = new BehaviorSubject(this.currentScore);
     currentScore$ = this.currentScoreSource.asObservable();
-
-    boardStatus: PieceStatus[] = [];
+    selectedPieces: PieceState[] = [];
+    boardState: PieceState[] = [];
 
     constructor( private http: Http) {};
 
@@ -25,19 +25,19 @@ export class GameStateService implements OnInit {
         return this.http.get(fullUrl)
             .toPromise()
             .then(res => {
-                this.boardStatus[tileIndex].value = res.json();
-                this.boardStatus[tileIndex].selected = true;
+                this.boardState[tileIndex].value = res.json();
+                this.boardState[tileIndex].selected = true;
                 return res.json() as string;
                 }
             );
     }
 
     isSelected(tileIndex): boolean {
-        return this.boardStatus[tileIndex].selected
+        return this.boardState[tileIndex].selected
     }
 
     isMatched(tileIndex): boolean {
-        return this.boardStatus[tileIndex].matched;
+        return this.boardState[tileIndex].matched;
     }
 
     setScore(increment): void {
@@ -45,7 +45,10 @@ export class GameStateService implements OnInit {
         this.currentScoreSource.next(this.currentScore);
     }
 
-    matchCheck(pieces) {
+    updateSelectedPieces(boardState) {
+       this.selectedPieces = boardState.filter((piece) => {
+            return piece.selected === true;
+        })
     }
 
     ngOnInit(): void {

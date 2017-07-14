@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AfterViewInit, QueryList, ViewChildren, ElementRef} from '@angular/core';
 import { GameBoard } from './game-board';
-import { PieceStatus } from './piece-list';
+import { PieceState } from './piece-list';
 import { GameBoardBuildService } from './game-board-buid.service';
 import { GameStateService } from './game-state.service';
 
@@ -27,7 +27,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
     constructor (private gameBoardBuildService: GameBoardBuildService,
     private gameStateService: GameStateService) {}
 
-    getBoardId(): void {
+    buildBoard(): void {
         this.gameBoardBuildService.getPieces()
                 .then(gameBoard => {
                     this.gameBoard = gameBoard;
@@ -36,25 +36,29 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
             })
             .then(pieces => {
                 for (let i = 0; i < this.gameBoard.length; i++) {
-                    const pieceStatus = new PieceStatus;
-                    pieceStatus.pieceId = i;
-                    pieceStatus.selected = false;
-                    pieceStatus.matched = false;
-                    pieceStatus.value = '';
-                    pieceStatus.matched = false;
-                    this.gameStateService.boardStatus.push(pieceStatus);
+                    const pieceState = new PieceState;
+                    pieceState.pieceId = i;
+                    pieceState.selected = false;
+                    pieceState.matched = false;
+                    pieceState.value = '';
+                    pieceState.matched = false;
+                    this.gameStateService.boardState.push(pieceState);
                     this.pieces.push(i);
                 }
             });
-            console.log(this.gameStateService.boardStatus)
+            console.log(this.gameStateService.boardState)
     }
 
-    getTileValue(event: any): void {
+    updateGameState(event: any): void {
         const clickedPieceId = event.target.id;
+        const clickedPieceMatched = this.gameStateService.isMatched(clickedPieceId);
+        const clickedPieceSelected = this.gameStateService.isSelected(clickedPieceId);
 
-        if (!this.gameStateService.isSelected(clickedPieceId) && !this.gameStateService.isMatched(clickedPieceId)) {
+        if (!clickedPieceSelected && !clickedPieceMatched) {
             this.gameStateService.getTileContents(this.id, clickedPieceId)
                 .then(tileValue => {
+                    this.gameStateService.updateSelectedPieces(this.gameStateService.boardState);
+                    console.log(this.gameStateService.selectedPieces.length);
                     event.srcElement.innerHTML = tileValue;
                     this.setNewScore();
                 });
@@ -66,7 +70,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.getBoardId();
+        this.buildBoard();
     }
 
     ngAfterViewInit() {

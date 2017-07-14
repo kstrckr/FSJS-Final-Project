@@ -1,4 +1,4 @@
-export class PieceStatus {
+export class PieceState {
     matched: boolean;
     pieceId: number;
     selected: boolean;
