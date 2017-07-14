@@ -1,6 +1,6 @@
 export class PieceStatus {
-    pieceId: number;
-    status: string;
-    value: string;
     matched: boolean;
+    pieceId: number;
+    selected: boolean;
+    value: string;
 }

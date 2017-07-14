@@ -38,7 +38,8 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
                 for (let i = 0; i < this.gameBoard.length; i++) {
                     const pieceStatus = new PieceStatus;
                     pieceStatus.pieceId = i;
-                    pieceStatus.status = 'unselected';
+                    pieceStatus.selected = false;
+                    pieceStatus.matched = false;
                     pieceStatus.value = '';
                     pieceStatus.matched = false;
                     this.gameStateService.boardStatus.push(pieceStatus);
@@ -50,11 +51,14 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
 
     getTileValue(event: any): void {
         const clickedPieceId = event.target.id;
-        this.gameStateService.getTileContents(this.id, clickedPieceId)
-            .then(tileValue => {
-                event.srcElement.innerHTML = tileValue;
-            });
-            console.log(this.gameStateService.boardStatus);
+
+        if (!this.gameStateService.isSelected(clickedPieceId) && !this.gameStateService.isMatched(clickedPieceId)) {
+            this.gameStateService.getTileContents(this.id, clickedPieceId)
+                .then(tileValue => {
+                    event.srcElement.innerHTML = tileValue;
+                    this.setNewScore();
+                });
+            }
         }
 
     setNewScore(): void {

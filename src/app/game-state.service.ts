@@ -26,9 +26,18 @@ export class GameStateService implements OnInit {
             .toPromise()
             .then(res => {
                 this.boardStatus[tileIndex].value = res.json();
+                this.boardStatus[tileIndex].selected = true;
                 return res.json() as string;
                 }
             );
+    }
+
+    isSelected(tileIndex): boolean {
+        return this.boardStatus[tileIndex].selected
+    }
+
+    isMatched(tileIndex): boolean {
+        return this.boardStatus[tileIndex].matched;
     }
 
     setScore(increment): void {
