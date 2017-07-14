@@ -2,7 +2,7 @@
         <div #gamePiece *ngFor="let piece of pieces; let i = index;"  
         (click)="getTileValue($event)"
         class="game-piece" 
-        id={{piece.pieceId}}
+        id={{i}}
         >
          <p></p>
         </div>

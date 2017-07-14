@@ -20,7 +20,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
 
     gameBoard: GameBoard;
     id: string;
-    pieces: PieceStatus[] = [];
+    pieces: number[] = [];
     piecesInDom: ElementRef[];
     selected: string[];
 
@@ -36,29 +36,26 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
             })
             .then(pieces => {
                 for (let i = 0; i < this.gameBoard.length; i++) {
-                    let pieceStatus = new PieceStatus;
+                    const pieceStatus = new PieceStatus;
                     pieceStatus.pieceId = i;
                     pieceStatus.status = 'unselected';
                     pieceStatus.value = '';
-                    this.pieces.push(pieceStatus);
+                    pieceStatus.matched = false;
+                    this.gameStateService.boardStatus.push(pieceStatus);
+                    this.pieces.push(i);
                 }
             });
+            console.log(this.gameStateService.boardStatus)
     }
 
     getTileValue(event: any): void {
-        const clickedPiece = this.pieces[event.target.id];
-        if (clickedPiece.status === 'selected' || clickedPiece.status === 'matched') {
-            return null;
-        } else {
-            this.pieces[clickedPiece.pieceId].status = 'selected';
-            this.gameStateService.getTileContents(this.id, event.target.id)
-                .then(tileValue => {
-                    clickedPiece.value = tileValue;
-                    event.srcElement.innerHTML = tileValue;
-                })
-                this.setNewScore();
+        const clickedPieceId = event.target.id;
+        this.gameStateService.getTileContents(this.id, clickedPieceId)
+            .then(tileValue => {
+                event.srcElement.innerHTML = tileValue;
+            });
+            console.log(this.gameStateService.boardStatus);
         }
-    }
 
     setNewScore(): void {
         this.gameStateService.setScore(1);

@@ -13,18 +13,19 @@ export class GameStateService implements OnInit {
     currentScore: number = 0;
     currentScoreSource: BehaviorSubject<number> = new BehaviorSubject(this.currentScore);
     currentScore$ = this.currentScoreSource.asObservable();
-    score: number = 0;
-    tileIndex: string;
+
+    boardStatus: PieceStatus[] = [];
 
     constructor( private http: Http) {};
 
 // called from game-board.components (click)="getTileValue()"
-    getTileContents(id, a): Promise<string> {
-        let url = 'http://localhost:3000';
-        let fullUrl = `${url}/api/checkmatch/${id}/${a}`;
+    getTileContents(boardId, tileIndex): Promise<string> {
+        const url = 'http://localhost:3000';
+        const fullUrl = `${url}/api/checkmatch/${boardId}/${tileIndex}`;
         return this.http.get(fullUrl)
             .toPromise()
             .then(res => {
+                this.boardStatus[tileIndex].value = res.json();
                 return res.json() as string;
                 }
             );
