@@ -8,7 +8,7 @@ import { PieceStatus } from './piece-list';
 
 @Injectable()
 
-export class MatchCheckService implements OnInit {
+export class GameStateService implements OnInit {
 
     currentScore: number = 0;
     currentScoreSource: BehaviorSubject<number> = new BehaviorSubject(this.currentScore);
@@ -36,26 +36,6 @@ export class MatchCheckService implements OnInit {
     }
 
     matchCheck(pieces) {
-        let matchState = {
-            match: false,
-            pair: false
-        }
-        let selectedPieces = pieces.filter(function(piece) {
-            return piece.status === 'selected'
-        })
-
-        if (selectedPieces.length < 1) {
-            return matchState;
-        } else if (selectedPieces.length === 2) {
-            if (selectedPieces[0].value === selectedPieces[1].value) {
-                matchState.match = true;
-                matchState.pair = true;
-            } else {
-            matchState.match = false;
-            matchState.pair = true;
-            }
-        }
-         return matchState
     }
 
     ngOnInit(): void {

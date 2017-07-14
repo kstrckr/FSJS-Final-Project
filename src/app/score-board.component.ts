@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatchCheckService } from './match-check.service';
+import { GameStateService } from './game-state.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -13,16 +13,16 @@ export class ScoreBoardComponent implements OnInit {
     score: number = 5;
     subscription: Subscription;
 
-    constructor(private matchCheckService: MatchCheckService) {
+    constructor(private gameStateService: GameStateService) {
     }
 
     getScore() {
-        this.matchCheckService.setScore(1);
+        this.gameStateService.setScore(1);
     }
 
     ngOnInit(): void {
 
-        this.matchCheckService.currentScore$.subscribe(value => {
+        this.gameStateService.currentScore$.subscribe(value => {
             this.score = value;
         });
        }

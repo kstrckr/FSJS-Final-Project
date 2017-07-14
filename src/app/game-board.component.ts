@@ -3,7 +3,7 @@ import { AfterViewInit, QueryList, ViewChildren, ElementRef} from '@angular/core
 import { GameBoard } from './game-board';
 import { PieceStatus } from './piece-list';
 import { GameBoardBuildService } from './game-board-buid.service';
-import { MatchCheckService } from './match-check.service';
+import { GameStateService } from './game-state.service';
 
 @Component({
     selector: 'app-game-board',
@@ -25,7 +25,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
     selected: string[];
 
     constructor (private gameBoardBuildService: GameBoardBuildService,
-    private matchCheckService: MatchCheckService) {}
+    private gameStateService: GameStateService) {}
 
     getBoardId(): void {
         this.gameBoardBuildService.getPieces()
@@ -51,19 +51,17 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
             return null;
         } else {
             this.pieces[clickedPiece.pieceId].status = 'selected';
-            this.matchCheckService.getTileContents(this.id, event.target.id)
+            this.gameStateService.getTileContents(this.id, event.target.id)
                 .then(tileValue => {
                     clickedPiece.value = tileValue;
                     event.srcElement.innerHTML = tileValue;
                 })
                 this.setNewScore();
-                console.log(this.pieces);
-
         }
     }
 
     setNewScore(): void {
-        this.matchCheckService.setScore(1);
+        this.gameStateService.setScore(1);
     }
 
     ngOnInit(): void {

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component';
 import { ScoreBoardComponent } from './score-board.component';
 import { GameBoardComponent } from './game-board.component';
-import { MatchCheckService } from './match-check.service'
+import { GameStateService } from './game-state.service'
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { MatchCheckService } from './match-check.service'
     HttpModule
    // JsonpModule
   ],
-  providers: [MatchCheckService],
+  providers: [GameStateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
