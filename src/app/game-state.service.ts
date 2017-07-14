@@ -51,6 +51,36 @@ export class GameStateService implements OnInit {
         })
     }
 
+    matchCheck() {
+        const selectedPieceA = this.selectedPieces[0];
+        const selectedPieceB = this.selectedPieces[1];
+        console.log(this.selectedPieces);
+        if (selectedPieceA.value !== '' && selectedPieceB.value !== '') {
+            if (selectedPieceA.value === selectedPieceB.value) {
+            selectedPieceA.matched = true;
+            selectedPieceA.selected = false;
+            selectedPieceB.matched = true;
+            selectedPieceB.selected = false;
+            return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    resetNonMatches(piecesInDom) {
+        const selectedPieceA = this.selectedPieces[0];
+        const selectedPieceB = this.selectedPieces[1];
+
+        selectedPieceA.selected = false;
+        selectedPieceA.value = '';
+        selectedPieceB.selected = false;
+        selectedPieceB.value = '';
+
+        piecesInDom[selectedPieceA.pieceId].nativeElement.innerHTML = '<p></p>'
+        piecesInDom[selectedPieceB.pieceId].nativeElement.innerHTML = '<p></p>'
+    }
+
     ngOnInit(): void {
     }
 

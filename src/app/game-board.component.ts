@@ -46,7 +46,6 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
                     this.pieces.push(i);
                 }
             });
-            console.log(this.gameStateService.boardState)
     }
 
     updateGameState(event: any): void {
@@ -55,10 +54,17 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
         const clickedPieceSelected = this.gameStateService.isSelected(clickedPieceId);
 
         if (!clickedPieceSelected && !clickedPieceMatched) {
+
+            if (this.gameStateService.selectedPieces.length === 2) {
+                const matchCheck = this.gameStateService.matchCheck();
+                if (!matchCheck) {
+                    this.gameStateService.resetNonMatches(this.piecesInDom)
+                }
+            }
+
             this.gameStateService.getTileContents(this.id, clickedPieceId)
                 .then(tileValue => {
                     this.gameStateService.updateSelectedPieces(this.gameStateService.boardState);
-                    console.log(this.gameStateService.selectedPieces.length);
                     event.srcElement.innerHTML = tileValue;
                     this.setNewScore();
                 });
