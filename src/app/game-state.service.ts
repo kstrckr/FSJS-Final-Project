@@ -54,7 +54,6 @@ export class GameStateService implements OnInit {
     matchCheck() {
         const selectedPieceA = this.selectedPieces[0];
         const selectedPieceB = this.selectedPieces[1];
-        console.log(this.selectedPieces);
         if (selectedPieceA.value !== '' && selectedPieceB.value !== '') {
             if (selectedPieceA.value === selectedPieceB.value) {
             selectedPieceA.matched = true;
@@ -79,6 +78,8 @@ export class GameStateService implements OnInit {
 
         piecesInDom[selectedPieceA.pieceId].nativeElement.innerHTML = '<p></p>'
         piecesInDom[selectedPieceB.pieceId].nativeElement.innerHTML = '<p></p>'
+
+        console.log(this.boardState);
     }
 
     ngOnInit(): void {

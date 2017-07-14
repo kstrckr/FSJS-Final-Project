@@ -9,6 +9,6 @@ import { ScoreBoardComponent } from './score-board.component';
   styleUrls: ['./app.component.css'],
 })
 
-export class AppComponent{
+export class AppComponent {
   title = 'Match Master';
 }
