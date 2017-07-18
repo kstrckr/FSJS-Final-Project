@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { GameSpaceComponent } from './game-space.component';
 import { ScoreBoardComponent } from './score-board.component';
 import { GameBoardComponent } from './game-board.component';
 import { GameStateService } from './game-state.service'
@@ -12,6 +13,7 @@ import { GameStateService } from './game-state.service'
 @NgModule({
   declarations: [
     AppComponent,
+    GameSpaceComponent,
     GameBoardComponent,
     ScoreBoardComponent
   ],
@@ -20,8 +22,8 @@ import { GameStateService } from './game-state.service'
     HttpModule,
     RouterModule.forRoot([
   {
-    path: 'game',
-    component: AppComponent
+    path: 'match-master',
+    component: GameSpaceComponent
   }
 ])
   ],

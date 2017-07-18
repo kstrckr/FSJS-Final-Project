@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { GameBoardComponent } from './game-board.component';
-import { ScoreBoardComponent } from './score-board.component';
-
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    template: `
+        <h1>Welcome to {{title}}</h1>
+        <a routerLink="/match-master">Load new Game!</a>
+        <router-outlet></router-outlet>
+    `
 })
 
 export class AppComponent {
-  title = 'Match Master';
+    title = 'Match Master';
 }
