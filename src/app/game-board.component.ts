@@ -70,7 +70,6 @@ The core cycle of the game, each click advances the game state by 1 full cycle
         const clickedPieceSelected: boolean = this.gameStateService.isSelected(clickedPieceId);
 
         if (!clickedPieceSelected && !clickedPieceMatched) {
-
             if (this.gameStateService.selectedPieces.length === 2) {
                 const matchCheck = this.gameStateService.matchCheck();
                 if (!matchCheck) {
