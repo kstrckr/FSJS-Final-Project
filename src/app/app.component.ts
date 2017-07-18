@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-root',
     template: `
-        <h1>Welcome to {{title}}</h1>
-        <a routerLink="/match-master">Load new Game!</a>
-        <router-outlet></router-outlet>
-    `
+        <p>Welcome to {{title}}</p>
+        <a routerLink='/match-master'>Load new Game</a>
+        <router-outlet></router-outlet>`,
+    styleUrls: ['./app.component.css'],
 })
 
 export class AppComponent {
