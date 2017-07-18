@@ -13,7 +13,9 @@ export class GameStateService implements OnInit {
     currentScore: number = 0;
     currentScoreSource: BehaviorSubject<number> = new BehaviorSubject(this.currentScore);
     currentScore$ = this.currentScoreSource.asObservable();
+// selectedPieces only reflects the currently selected pieces and has a max length of 2
     selectedPieces: PieceState[] = [];
+// boardState represents all pieces on the board at each stage of the game cycle
     boardState: PieceState[] = [];
 
     constructor( private http: Http) {};
@@ -60,6 +62,7 @@ export class GameStateService implements OnInit {
             selectedPieceA.selected = false;
             selectedPieceB.matched = true;
             selectedPieceB.selected = false;
+            console.log(this.boardState);
             return true;
             }
         } else {

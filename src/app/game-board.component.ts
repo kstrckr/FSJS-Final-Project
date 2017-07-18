@@ -27,6 +27,10 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
     constructor (private gameBoardBuildService: GameBoardBuildService,
     private gameStateService: GameStateService) {}
 
+// uses the server's API to generate a board's values, then receives 
+// the ID of the new board and it's size. Uses the size to build the proper
+// number of tiles
+
     buildBoard(): void {
         this.gameBoardBuildService.getPieces()
                 .then(gameBoard => {
@@ -48,10 +52,22 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
             });
     }
 
+
+/*
+The core cycle of the game, each click advances the game state by 1 full cycle
+1: the clicked piece's ID value is stored
+2: the cycle is ended without change if the clicked piece is already Matched or Selected
+3: if the piece is neitehr Selected or Matched the number of Selected tiles already on the board is checked
+4: if there are 0 or 1 Selected tiles already on the board the value of the tile is fetched from the server and displayed
+5: if there are 2 previously selected pieces on the board the next click checks their values for a match 
+    and if they aren't a match the board is reset before the new piece is displayed
+6: game-state.service's 'boardState' is an array of piece objects which each tracks it's HTML counterpart's status
+    it is updated each cycle when matchCheck() is called.
+*/
     updateGameState(event: any): void {
-        const clickedPieceId = event.target.id;
-        const clickedPieceMatched = this.gameStateService.isMatched(clickedPieceId);
-        const clickedPieceSelected = this.gameStateService.isSelected(clickedPieceId);
+        const clickedPieceId: string = event.target.id;
+        const clickedPieceMatched: boolean = this.gameStateService.isMatched(clickedPieceId);
+        const clickedPieceSelected: boolean = this.gameStateService.isSelected(clickedPieceId);
 
         if (!clickedPieceSelected && !clickedPieceMatched) {
 
@@ -71,19 +87,22 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
             }
         }
 
+// updates the score on each click, lower scores are better
     setNewScore(): void {
         this.gameStateService.setScore(1);
     }
 
+// builds the board when the app first starts
     ngOnInit(): void {
         this.buildBoard();
     }
 
+
+// returns a queryList of all gamePieces' HTML counterparts so that the inner values can be set and cleared each game cycle
     ngAfterViewInit() {
          this.gamePieces.changes.subscribe(
              (r) => {
                 this.piecesInDom = this.gamePieces.toArray();
-                // this.piecesInDom[0].nativeElement.innerHTML = '!'
                 });
         }
 }
