@@ -28,7 +28,7 @@ export class LoadingScreenComponent {
     initials: string;
     constructor(
         private gameStateService: GameStateService,
-        private router: Router ) {};
+        private router: Router) {};
 
     saveInitials() {
        this.gameStateService.playerInitials = this.initials
@@ -49,4 +49,5 @@ export class LoadingScreenComponent {
             this.router.navigateByUrl('/match-master');
         }
     }
+
 }
