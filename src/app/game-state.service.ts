@@ -75,7 +75,7 @@ export class GameStateService implements OnInit {
     winCheck() {
         const matchTiles = this.boardState.filter((piece) => piece.matched === true)
         if (matchTiles.length === this.boardState.length) {
-            console.log('WIN');
+            console.log(`${this.playerInitials} is a Match Master! with a score of ${this.currentScore}`);
         }
     }
 

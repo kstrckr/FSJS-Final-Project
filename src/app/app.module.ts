@@ -9,6 +9,7 @@ import { GameSpaceComponent } from './game-space.component';
 import { ScoreBoardComponent } from './score-board.component';
 import { GameBoardComponent } from './game-board.component';
 import { GameStateService } from './game-state.service'
+import { LeaderBoardComponent } from './leader-board.component';
 
 
 @NgModule({
@@ -26,6 +27,10 @@ import { GameStateService } from './game-state.service'
   {
     path: 'match-master',
     component: GameSpaceComponent
+  },
+  {
+    path: 'leader-board',
+    component: LeaderBoardComponent
   }
 ])
   ],
