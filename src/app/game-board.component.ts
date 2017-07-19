@@ -70,11 +70,9 @@ The core cycle of the game, each click advances the game state by 1 full cycle
         const clickedPieceSelected: boolean = this.gameStateService.isSelected(clickedPieceId);
 
         if (!clickedPieceSelected && !clickedPieceMatched) {
+
             if (this.gameStateService.selectedPieces.length === 2) {
-                const matchCheck = this.gameStateService.matchCheck();
-                if (!matchCheck) {
-                    this.gameStateService.resetNonMatches(this.piecesInDom)
-                }
+                this.gameStateService.resetNonMatches(this.piecesInDom);
             }
 
             this.gameStateService.getTileContents(this.id, clickedPieceId)
@@ -82,6 +80,15 @@ The core cycle of the game, each click advances the game state by 1 full cycle
                     this.gameStateService.updateSelectedPieces(this.gameStateService.boardState);
                     event.srcElement.innerHTML = tileValue;
                     this.setNewScore();
+                    if (this.gameStateService.selectedPieces.length < 2) {
+                        return
+                    } else if (this.gameStateService.selectedPieces.length === 2) {
+                        const isMatched = this.gameStateService.matchCheck()
+                        if (!isMatched) {
+                            this.gameStateService.updateSelectedPieces(this.gameStateService.boardState);
+                        }
+                        this.gameStateService.winCheck();
+                    }
                 });
             }
         }

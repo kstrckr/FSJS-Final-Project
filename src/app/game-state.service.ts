@@ -64,11 +64,18 @@ export class GameStateService implements OnInit {
             selectedPieceA.selected = false;
             selectedPieceB.matched = true;
             selectedPieceB.selected = false;
-            console.log(this.boardState);
+            // console.log(this.boardState);
             return true;
             }
         } else {
             return false;
+        }
+    }
+
+    winCheck() {
+        const matchTiles = this.boardState.filter((piece) => piece.matched === true)
+        if (matchTiles.length === this.boardState.length) {
+            console.log('WIN');
         }
     }
 
@@ -77,14 +84,17 @@ export class GameStateService implements OnInit {
         const selectedPieceB = this.selectedPieces[1];
 
         selectedPieceA.selected = false;
-        selectedPieceA.value = '';
         selectedPieceB.selected = false;
+
+        selectedPieceA.value = '';
         selectedPieceB.value = '';
 
+        if (selectedPieceA.matched === false && selectedPieceB .matched === false) {
         piecesInDom[selectedPieceA.pieceId].nativeElement.innerHTML = '<p></p>'
         piecesInDom[selectedPieceB.pieceId].nativeElement.innerHTML = '<p></p>'
+        }
 
-        console.log(this.boardState);
+        //console.log(this.boardState);
     }
 
     ngOnInit(): void {
