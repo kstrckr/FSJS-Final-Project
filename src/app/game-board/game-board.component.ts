@@ -1,9 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { AfterViewInit, QueryList, ViewChildren, ElementRef} from '@angular/core';
-import { GameBoard } from './game-board';
-import { PieceState } from './piece-list';
-import { GameBoardBuildService } from './game-board-buid.service';
-import { GameStateService } from './game-state.service';
+import { GameBoard } from '../models/game-board';
+import { PieceState } from '../models/piece-list';
+import { GameBoardBuildService } from '../services/game-board-buid.service';
+import { GameStateService } from '../services/game-state.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-game-board',
@@ -24,8 +25,10 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
     piecesInDom: ElementRef[];
     selected: string[];
 
-    constructor (private gameBoardBuildService: GameBoardBuildService,
-    private gameStateService: GameStateService) {}
+    constructor (
+        private gameBoardBuildService: GameBoardBuildService,
+        private gameStateService: GameStateService,
+        private router: Router) {}
 
 // uses the server's API to generate a board's values, then receives 
 // the ID of the new board and it's size. Uses the size to build the proper
@@ -87,7 +90,10 @@ The core cycle of the game, each click advances the game state by 1 full cycle
                         if (!isMatched) {
                             this.gameStateService.updateSelectedPieces(this.gameStateService.boardState);
                         }
-                        this.gameStateService.winCheck();
+                        const hasWon = this.gameStateService.winCheck();
+                        if (hasWon) {
+                            this.router.navigateByUrl('/leader-board');
+                        }
                     }
                 });
             }

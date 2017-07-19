@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { GameStateService } from './game-state.service';
-import { LoadingScreenComponent } from './loading-screen.component';
+import { GameStateService } from './services/game-state.service';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 @Component({
     selector: 'app-root',

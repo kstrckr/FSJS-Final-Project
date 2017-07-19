@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { GameBoardComponent } from './game-board.component';
-import { ScoreBoardComponent } from './score-board.component';
+import { GameBoardComponent } from '../game-board/game-board.component';
+import { ScoreBoardComponent } from '../score-board/score-board.component';
 
 
 @Component({

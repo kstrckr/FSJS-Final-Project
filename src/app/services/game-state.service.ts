@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import 'rxjs/add/operator/toPromise';
 
-import { PieceState } from './piece-list';
+import { PieceState } from '../models/piece-list';
 
 @Injectable()
 
@@ -76,6 +76,7 @@ export class GameStateService implements OnInit {
         const matchTiles = this.boardState.filter((piece) => piece.matched === true)
         if (matchTiles.length === this.boardState.length) {
             console.log(`${this.playerInitials} is a Match Master! with a score of ${this.currentScore}`);
+            return true;
         }
     }
 
@@ -94,7 +95,7 @@ export class GameStateService implements OnInit {
         piecesInDom[selectedPieceB.pieceId].nativeElement.innerHTML = '<p></p>'
         }
 
-        //console.log(this.boardState);
+        // console.log(this.boardState);
     }
 
     ngOnInit(): void {

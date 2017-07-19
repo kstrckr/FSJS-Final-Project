@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { GameStateService } from './game-state.service';
+import { GameStateService } from '../services/game-state.service';
 
 @Component({
     selector: 'app-loading-screen',
     template: `
         <p>{{title}}</p>
-        <div class="initials-input" routerLinkActive="link-hidden">
+        <div class="initials-input">
 
                 <label for="initials">Enter Initials</label>
                 <input type="text" id="initials" required [(ngModel)]="initials">
@@ -13,7 +13,6 @@ import { GameStateService } from './game-state.service';
                 <button type="submit"
                 (click)="saveInitials()"
                 routerLink='/match-master'
-                routerLinkActive="link-hidden"
                 class="bit-button">BEGIN!</button>
 
         </div>`,
