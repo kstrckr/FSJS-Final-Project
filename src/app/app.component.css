@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 a {
     color: #000;
 }
@@ -5,4 +6,18 @@ a {
 p {
     font-size: 32px;
     margin: 15px
+=======
+.link-hidden {
+    display: none;
+}
+
+.bit-button {
+    padding: 10px;
+    font-family : inherit;
+    background: none;
+}
+
+.bit-button:hover {
+    background-color: lightgray;
+>>>>>>> 44ffa54aaf68d9c87582c89681edaad977008fc1
 }

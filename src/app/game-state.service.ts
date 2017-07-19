@@ -10,6 +10,8 @@ import { PieceState } from './piece-list';
 
 export class GameStateService implements OnInit {
 
+    playerInitials: string;
+
     currentScore: number = 0;
     currentScoreSource: BehaviorSubject<number> = new BehaviorSubject(this.currentScore);
     currentScore$ = this.currentScoreSource.asObservable();
