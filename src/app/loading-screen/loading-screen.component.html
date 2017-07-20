@@ -1,0 +1,19 @@
+<p>{{title}}</p>
+<div class="input-container">
+    <label for="initials">Enter Initials</label>
+    <input type="text"
+        class="initials-input"
+        id="initials"
+        required
+        autofocus
+        [(ngModel)]="initials"
+        (keypress)="saveInitialsEnter($event.keyCode)"
+    >
+<br>
+    <button 
+        type="submit"
+        (click)="saveInitials()"
+        class="bit-button"
+    >BEGIN!</button>
+
+</div>

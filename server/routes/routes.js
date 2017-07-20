@@ -48,15 +48,23 @@ router.post("/log-score", function(req, res, next){
     
 })
 
-router.get('/high-scores/:score', function(req, res, next){
+router.get('/high-scores/', function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    const score = req.params.score;
-    const minScore = score - 5;
-    const maxScore = score + 5;
 
-    ScoreRecord.find({score: {$gte: minScore, $lte: maxScore}}, function(err, scores){
-        res.json(scores);
+    ScoreRecord.find({}, function(err, scores){
+
+        scores.sort((a, b) => a.score - b.score)
+        res.json(scores.slice(0,10));
+        if (scores.length > 10){
+        let scoreFloor = scores[10].score
+            ScoreRecord.remove({score: {$gte: scoreFloor}}, function (err) {
+                if (err) console.error(err);
+                console.log('Losers Purged!');
+            })
+        }
+        
+        
     })
 })
 

@@ -1,1 +1,7 @@
-<h1>{{title}}</h1>
+<h1>{{congratulations}}</h1>
+<ul class="leader-board-container">
+    <li *ngFor="let player of leaderBoard; let i = index"
+    class="leader-board">
+        <p>{{player.rank}}. {{player.playerInitials}}: {{player.score}}</p>
+    </li>
+</ul>
