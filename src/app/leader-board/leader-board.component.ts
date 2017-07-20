@@ -21,7 +21,7 @@ export class LeaderBoardComponent implements OnInit {
         this.http.get(this.url)
             .toPromise()
             .then(res => {
-                this.playerRank = res.json()
+                this.playerRank = res.json().sort((a, b) => a.score - b.score)
                 console.log(this.playerRank);
             })
     }

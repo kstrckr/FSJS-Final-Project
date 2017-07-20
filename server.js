@@ -18,6 +18,8 @@ db.once('open', function(){
     console.log("DB Connected");
 })
 
+app.use(jsonParser());
+
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.use("/api", routes);

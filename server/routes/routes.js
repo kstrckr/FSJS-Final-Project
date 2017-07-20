@@ -27,25 +27,29 @@ router.get("/method", function(req, res, next){
     })
 })
 
-router.post("/log-score/:_id/:initials/:score", function(req, res, next){
-    const initials = req.params.initials;
-    const score = req.params.score;
-    const boardId = req.params._id;
+router.post("/log-score", function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    const initials = req.body.initials;
+    const score = req.body.score;
+    const boardId = req.body.boardId;
 
     const highScore = new ScoreRecord({
         playerInitials: initials,
         score: score,
         boardId: boardId
     });
-    res.json(highScore);
+    console.log(highScore);
 
     highScore.save(function(err){
         if (err) return console.error(err);
     })
+    
 })
 
 router.get('/high-scores/:score', function(req, res, next){
-     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const score = req.params.score;
     const minScore = score - 5;

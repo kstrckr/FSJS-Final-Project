@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import 'rxjs/add/operator/toPromise';
@@ -19,6 +19,7 @@ export class GameStateService implements OnInit {
     selectedPieces: PieceState[] = [];
 // boardState represents all pieces on the board at each stage of the game cycle
     boardState: PieceState[] = [];
+    postUrl: string = `http://localhost:3000/api/log-score`;
 
     constructor( private http: Http) {};
 
@@ -75,9 +76,31 @@ export class GameStateService implements OnInit {
     winCheck() {
         const matchTiles = this.boardState.filter((piece) => piece.matched === true)
         if (matchTiles.length === this.boardState.length) {
-            console.log(`${this.playerInitials} is a Match Master! with a score of ${this.currentScore}`);
+            this.saveScoreWithObservable();
+            // console.log(`${this.playerInitials} is a Match Master! with a score of ${this.currentScore}`);
             return true;
         }
+    }
+
+    saveScore(initials, score, id) {
+        const body = {
+            initials: initials,
+            score: score,
+            boardId: id
+        }
+        const url = this.postUrl;
+        const ob = this.http.post(url, JSON.stringify(body)).subscribe();
+    }
+
+    saveScoreWithObservable(): Promise<any> {
+        const body = {
+            initials: this.playerInitials,
+            score: this.currentScore,
+            boardId: 'temp-id'
+        }
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers });
+        return this.http.post(this.postUrl, body, options).toPromise().then();
     }
 
     resetNonMatches(piecesInDom) {
