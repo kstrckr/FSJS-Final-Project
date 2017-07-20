@@ -39,6 +39,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
                 .then(gameBoard => {
                     this.gameBoard = gameBoard;
                     this.id = gameBoard.id;
+                    this.gameStateService.boardId = this.id;
             //  console.log(this.gameBoard);
             })
             .then(pieces => {

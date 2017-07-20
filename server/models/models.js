@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 
 const MatchGameSchema = new Schema({
     createdAt: {type: Date, default: Date.now},
+    won: {type: Boolean, default: false},
     length: Number,
     gameTiles: {type: [], default: []}
 })

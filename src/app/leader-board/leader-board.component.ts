@@ -28,7 +28,8 @@ export class LeaderBoardComponent implements OnInit {
                 let isTopTen: boolean = false;
                 this.leaderBoard = res.json()
                 this.leaderBoard.forEach((element, i) => element.rank = i + 1)
-                if (this.score <= this.leaderBoard[9].score) {
+                const lastScore = this.leaderBoard.length - 1;
+                if (this.score <= this.leaderBoard[lastScore].score) {
                     isTopTen = true;
                 }
 

@@ -48,6 +48,23 @@ router.post("/log-score", function(req, res, next){
     
 })
 
+router.put("/win", function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    const id = req.body.id;
+    NewLevel.findOne({"_id": id}, function(err, board){
+        if (err) console.error(err);
+        board.won = true;
+       // board.createdAt = board.createdAt;
+       // board.length = board.length;
+       // board.gameTiles = board.gameTiles;
+       board.save(function(err) {
+           if (err) res.status(500).send(err)
+       })
+    })
+})
+
 router.get('/high-scores/', function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -63,8 +80,6 @@ router.get('/high-scores/', function(req, res, next){
                 console.log('Losers Purged!');
             })
         }
-        
-        
     })
 })
 
@@ -87,7 +102,5 @@ router.get("/checkmatch/:_id/:a/:b?", function(req, res, next){
         res.json(data.gameTiles[tileA]);
     })
 })
-
-
 
 module.exports = router;

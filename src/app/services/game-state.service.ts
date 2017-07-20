@@ -11,7 +11,7 @@ import { PieceState } from '../models/piece-list';
 export class GameStateService implements OnInit {
 
     playerInitials: string;
-
+    boardId: string;
     currentScore: number = 0;
     currentScoreSource: BehaviorSubject<number> = new BehaviorSubject(this.currentScore);
     currentScore$ = this.currentScoreSource.asObservable();
@@ -20,6 +20,7 @@ export class GameStateService implements OnInit {
 // boardState represents all pieces on the board at each stage of the game cycle
     boardState: PieceState[] = [];
     postUrl: string = `http://localhost:3000/api/log-score`;
+    putUrl: string = `http://localhost:3000/api/win`;
 
     constructor( private http: Http) {};
 
@@ -76,23 +77,26 @@ export class GameStateService implements OnInit {
     winCheck() {
         const matchTiles = this.boardState.filter((piece) => piece.matched === true)
         if (matchTiles.length === this.boardState.length) {
-            this.saveScoreWithObservable();
+            this.saveScoreWithPromise();
+            this.updateBoardWithWinTime();
             // console.log(`${this.playerInitials} is a Match Master! with a score of ${this.currentScore}`);
             return true;
         }
     }
 
-    saveScore(initials, score, id) {
+    updateBoardWithWinTime(): Promise<any> {
+        console.log(this.boardId);
         const body = {
-            initials: initials,
-            score: score,
-            boardId: id
+            id: this.boardId
         }
-        const url = this.postUrl;
-        const ob = this.http.post(url, JSON.stringify(body)).subscribe();
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers });
+        return this.http.put(this.putUrl, body, options).toPromise().then(function(){
+            console.log(`board ${this.boardId} updated with win time`);
+        });
     }
 
-    saveScoreWithObservable(): Promise<any> {
+    saveScoreWithPromise(): Promise<any> {
         const body = {
             initials: this.playerInitials,
             score: this.currentScore,
