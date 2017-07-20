@@ -87,7 +87,7 @@ The core cycle of the game, each click advances the game state by 1 full cycle
             this.gameStateService.getTileContents(this.id, clickedPieceId)
                 .then(tileValue => {
                     this.gameStateService.updateSelectedPieces(this.gameStateService.boardState);
-                    event.srcElement.innerHTML = tileValue;
+                    event.target.innerHTML = tileValue;
                     this.setNewScore();
                     if (this.gameStateService.selectedPieces.length < 2) {
                         return
