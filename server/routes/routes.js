@@ -108,10 +108,10 @@ router.get("/checkmatch/:_id/:a/:b?", function(req, res, next){
         
     if(req.params.b) {
         let tileB = req.params.b;
-        console.log(data.gameTiles[tileA], data.gameTiles[tileB]);
+        //console.log(data.gameTiles[tileA], data.gameTiles[tileB]);
         
     } else {
-        console.log(data.gameTiles[tileA])
+        //console.log(data.gameTiles[tileA])
     }
 
         res.json(data.gameTiles[tileA]);
