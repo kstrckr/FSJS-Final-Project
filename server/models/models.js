@@ -10,6 +10,12 @@ const MatchGameSchema = new Schema({
     gameTiles: {type: [], default: []}
 })
 
+const PlayerScoreSchema = new Schema({
+    playerInitials: String,
+    score: Number,
+    boardId: String
+})
+
 //Instance Method
 MatchGameSchema.methods.generateBoard = function(length){
     let newBoard = [];
@@ -30,8 +36,9 @@ MatchGameSchema.methods.generateBoard = function(length){
 }
 
 const NewLevel = mongoose.model('NewLevel', MatchGameSchema);
-
+const ScoreRecord = mongoose.model('ScoreRecord', PlayerScoreSchema)
 
 
 //module.exports.level1 = level1;
 module.exports.NewLevel = NewLevel;
+module.exports.ScoreRecord = ScoreRecord;

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { GameStateService } from '../services/game-state.service';
 
 @Component({
@@ -7,9 +8,26 @@ import { GameStateService } from '../services/game-state.service';
     styleUrls: ['./leader-board.component.css']
 })
 
-export class LeaderBoardComponent {
-    title = `${this.gameStateService.playerInitials} achieved Match Mastery with a score of ${this.gameStateService.currentScore}`
+export class LeaderBoardComponent implements OnInit {
 
-    constructor(private gameStateService: GameStateService) {};
+    url: string = `http://localhost:3000/api/high-scores/${this.gameStateService.currentScore}`;
+    title = `${this.gameStateService.playerInitials} achieved Match Mastery with a score of ${this.gameStateService.currentScore}`
+    playerRank: object[];
+
+    constructor(private http: Http,
+                private gameStateService: GameStateService) { };
+
+    getPlayerRank(): void {
+        this.http.get(this.url)
+            .toPromise()
+            .then(res => {
+                this.playerRank = res.json()
+                console.log(this.playerRank);
+            })
+    }
+
+    ngOnInit(): void {
+        this.getPlayerRank();
+    }
 
 }
