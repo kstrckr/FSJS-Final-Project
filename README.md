@@ -19,3 +19,12 @@ After the game board loads click 2 different tiles. Clicking a 3rd tile will hid
 Matches will remain face up until you've matched all the tiles
 
 After matching all the tiles your final score will be displaced along with a leaderboard of up to the top 10 scores recorded to the database
+
+App Structure:
+
+the front end code has been built from Angular source files into the dist folder. Built files are served via node using express
+server.js lives in the root directory, and node modules it requires live in the server directory (also in the root)
+
+the angular source files are included in src/app and are organized into directories per component plus a single services directory
+
+the most detailed comments are in services/game-state.service.ts with comments for clarity throughout the other component files
