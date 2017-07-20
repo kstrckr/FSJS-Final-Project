@@ -1,3 +1,5 @@
+// loading-screen is the entry point of the app. It records the player's name/initials and launches the game
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameStateService } from '../services/game-state.service';

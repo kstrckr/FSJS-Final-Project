@@ -1,3 +1,5 @@
+// this component handles the view for the main game space, the board full of tiles
+
 import { Component, OnInit} from '@angular/core';
 import { AfterViewInit, QueryList, ViewChildren, ElementRef} from '@angular/core';
 import { GameBoard } from '../models/game-board';
@@ -30,9 +32,11 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
         private gameStateService: GameStateService,
         private router: Router) {}
 
-// uses the server's API to generate a board's values, then receives 
-// the ID of the new board and it's size. Uses the size to build the proper
-// number of tiles
+/*
+ buildBoard() uses the server's API to generate a board's values, then receives
+ the ID of the new board and its size. Uses the size to build the proper
+ number of tiles
+*/
 
     buildBoard(): void {
         this.gameBoardBuildService.getPieces()
@@ -59,14 +63,15 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
 
 /*
 The core cycle of the game, each click advances the game state by 1 full cycle
-1: the clicked piece's ID value is stored
-2: the cycle is ended without change if the clicked piece is already Matched or Selected
-3: if the piece is neitehr Selected or Matched the number of Selected tiles already on the board is checked
-4: if there are 0 or 1 Selected tiles already on the board the value of the tile is fetched from the server and displayed
-5: if there are 2 previously selected pieces on the board the next click checks their values for a match 
-    and if they aren't a match the board is reset before the new piece is displayed
-6: game-state.service's 'boardState' is an array of piece objects which each tracks it's HTML counterpart's status
-    it is updated each cycle when matchCheck() is called.
+1: the clicked piece is checked to make sure it's not already matched or selected
+2: the board is checked to see if 2 tiles are already face up and selected
+3: if 2 pieces are face up and not matched they're reset to empty
+4: the value of the clicked tile is fetched from the server and returned as a Promise and the score is incremented by 1
+5: the clicked tile is updated in gameState metadata as selected along with its assigned value
+6: if this tile is the second selected and face up matchCheck() is run to compare values
+7: winCheck() is called to see if the game has been won
+8: if winCheck() returns false the cycle continues with the next click on a new tile
+9: if winCheck() returns true the view is updated to the leader-board (./leader-board/leader-board.component.ts)
 */
     updateGameState(event: any): void {
         const clickedPieceId: string = event.target.id;

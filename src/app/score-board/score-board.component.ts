@@ -1,3 +1,5 @@
+// score-board simply displays the current score as it's updated by the game-state-service
+
 import { Component, OnInit } from '@angular/core';
 import { GameStateService } from '../services/game-state.service';
 import { Subscription } from 'rxjs/Subscription';

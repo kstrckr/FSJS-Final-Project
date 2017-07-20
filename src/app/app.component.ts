@@ -1,3 +1,5 @@
+// simply manages the views as called by the app's router in app.module.ts
+
 import { Component } from '@angular/core';
 import { GameStateService } from './services/game-state.service';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';

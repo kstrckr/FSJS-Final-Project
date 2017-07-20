@@ -1,5 +1,9 @@
 'use strict';
 
+/*
+sets up the server for routing of compiled Angular source files and the api
+*/
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');

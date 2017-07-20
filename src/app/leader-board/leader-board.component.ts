@@ -1,3 +1,5 @@
+// leader-boad appears after a game has been won. It lists the final score, whether you made top 10 or not, and lists the top 10 high scores
+
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { GameStateService } from '../services/game-state.service';
@@ -20,6 +22,11 @@ export class LeaderBoardComponent implements OnInit {
 
     constructor(private http: Http,
                 private gameStateService: GameStateService) { };
+
+/*
+        getTopTen() is called OnInit and gets the top 10 score saved to the database,
+        prepares them for display, and renders them as a column of <li> elements
+*/
 
     getTopTen(): void {
         this.http.get(this.url)
