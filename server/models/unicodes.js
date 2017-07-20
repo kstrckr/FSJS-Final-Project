@@ -1,3 +1,5 @@
+// Defines all possible tile values
+
 const codes = [
 	161,
 	162,

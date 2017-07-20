@@ -1,5 +1,9 @@
 'use strict';
 
+// mongoose models
+// MatchGameSchema defines a single game full of tiles on the game-board
+// PlayerScoreSchema defines a single score from a single game tied to the initials entered by the user
+
 const mongoose = require('mongoose');
 const allCodes = require('./unicodes');
 var Schema = mongoose.Schema;

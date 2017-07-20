@@ -1,5 +1,7 @@
 'use strict';
 
+//all api routes and route logic middleware
+
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -8,11 +10,15 @@ const NewLevel = require('../models/models').NewLevel;
 const ScoreRecord = require('../models/models').ScoreRecord;
 const db = mongoose.connection;
 
+/*
 router.get("/", function(req, res, next){
     res.render('index', { title: 'Hey', message: 'Hello there!' });
 })
+*/
 
-router.get("/method", function(req, res, next){
+//the main route that returns a boards size and ID, and saves the tile values to the database
+
+router.get("/build-board", function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const level1 = new NewLevel();
@@ -27,6 +33,8 @@ router.get("/method", function(req, res, next){
     })
 })
 
+// Posts the score of the user after winning a game
+
 router.post("/log-score", function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -40,13 +48,15 @@ router.post("/log-score", function(req, res, next){
         score: score,
         boardId: boardId
     });
-    console.log(highScore);
+    //console.log(highScore);
 
     highScore.save(function(err){
         if (err) return console.error(err);
     })
     
 })
+
+// Updates the board's status on the server as having been won by a player
 
 router.put("/win", function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -65,6 +75,9 @@ router.put("/win", function(req, res, next){
     })
 })
 
+// finds all saved scores on the database, sorts them (ascending), deletes any that aren't in the top 10 from the database
+// the organized top 10 will include the user's latest score if they played well enough
+
 router.get('/high-scores/', function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -82,6 +95,8 @@ router.get('/high-scores/', function(req, res, next){
         }
     })
 })
+
+//returns the value of a tile when clicked by the player, this ensures that tile values aren't exposed to the client until clicked on in real time
 
 router.get("/checkmatch/:_id/:a/:b?", function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");

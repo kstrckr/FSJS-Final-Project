@@ -16,6 +16,7 @@ const config = require('./server/config');
 
 mongoose.connect("mongodb://localhost:27017/sandbox")
 
+//connects to mongodb
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
@@ -24,14 +25,17 @@ db.once('open', function(){
 
 app.use(jsonParser());
 
+// static directory setup
 app.use(express.static(path.join(__dirname, 'dist')))
 
+// defines all api routes
 app.use("/api", routes);
 
+// ensures all non api url's get served the compiled and rendered Angular index file
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'))
 });
 
 app.listen(config.port, function(){
-    console.log(`Glorious node app running on port ${config.port}`)
+    console.log(`You've Got Node on port ${config.port}`)
 });
