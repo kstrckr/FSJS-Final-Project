@@ -30,3 +30,10 @@ server.js lives in the root directory, and node modules it requires live in the 
 the angular source files are included in src/app and are organized into directories per component plus a single services directory
 
 **the most detailed comments are in ./src/app/game-board/game-board.component with comments for clarity throughout the other component, service, and server files**
+
+**TODO**
+1. Styling needs some work for better compatability with IE
+2. There's bug in the view of the gameboard that caues an intermittant jitter or twitch when the tile's value is displayed - needs diagnosing and a fix
+3. Enable replaying a saved board that corresponds to a leader-board score so you can try and best someone else at the exact same board
+4. Tweak scoring so Hi scores are better, include a time component
+5. Add a level system that adds progressively more tiles per level
