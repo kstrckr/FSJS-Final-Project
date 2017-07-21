@@ -28,4 +28,4 @@ server.js lives in the root directory, and node modules it requires live in the 
 
 the angular source files are included in src/app and are organized into directories per component plus a single services directory
 
-the most detailed comments are in ./src/app/game-board/game-board.component with comments for clarity throughout the other component files
+**the most detailed comments are in ./src/app/game-board/game-board.component with comments for clarity throughout the other component files**

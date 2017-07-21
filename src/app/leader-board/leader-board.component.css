@@ -1,10 +1,11 @@
 .leader-board-container {
     margin: 0 auto;
     padding: 0;
-    border-width: 4px;
+    border-width: 4px 4px 0 4px;
     border-color: #000;
     border-style: solid;
     width: 80%;
+    box-shadow: 3px 3px 0 0 grey;
 }
 
 .leader-board {
@@ -15,6 +16,27 @@
     border-width: 0 0 4px 0;
     border-color: #000;
     border-style: solid;
+    box-shadow: inset 4px 4px 0 0 lightgrey;
+}
+
+.leader-board:hover {
+    background-color: lightgray;
+}
+
+.ranking {
+    margin-left: 30px;
+    display: inline;
+}
+
+.name {
+    display: inline;
+    margin: 0 auto;
+}
+
+.score {
+    display: inline;
+    margin-right: 30px;
+    float: right;
 }
 
 .leader-board p {

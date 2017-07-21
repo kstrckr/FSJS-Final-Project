@@ -2,6 +2,10 @@
 <ul class="leader-board-container">
     <li *ngFor="let player of leaderBoard; let i = index"
     class="leader-board">
-        <p>{{player.rank}}. {{player.playerInitials}}: {{player.score}}</p>
+        
+            <div class="ranking">{{player.rank}}.</div> 
+            <div class="name">{{player.playerInitials}}</div> 
+            <div class="score">{{player.score}}</div>
+        
     </li>
 </ul>
