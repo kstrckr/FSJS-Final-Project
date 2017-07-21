@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const level1 = require('../models/models').level1;
 const NewLevel = require('../models/models').NewLevel;
 const ScoreRecord = require('../models/models').ScoreRecord;
+const seedFiles = require('../models/high-scores-seed.json');
 const db = mongoose.connection;
 
 /*
@@ -39,6 +40,7 @@ router.post("/log-score", function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
+    
     const initials = req.body.initials;
     const score = req.body.score;
     const boardId = req.body.boardId;
@@ -48,7 +50,10 @@ router.post("/log-score", function(req, res, next){
         score: score,
         boardId: boardId
     });
+
+ 
     //console.log(highScore);
+
 
     highScore.save(function(err){
         if (err) return console.error(err);
@@ -119,3 +124,20 @@ router.get("/checkmatch/:_id/:a/:b?", function(req, res, next){
 })
 
 module.exports = router;
+
+/*
+this counts and fills in the database with enough seeded data to 
+generate a full top 10 leaderboard when the server is spun up
+*/
+
+ScoreRecord.count({}, function( err, count){
+    console.log(count);
+    if (count <= 10) {
+        let diff = (10 - count);
+        console.log(diff);
+        let seedToTen = seedFiles.slice(0, diff);
+        ScoreRecord.create(seedToTen, function(err, newFiles) {
+            if (err) console.error(err);
+        })
+    }
+})

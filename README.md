@@ -2,7 +2,7 @@
 **FSJS Final Project**
 **07/20/2017**
 
-To try out Match Master for yourself,
+To try out Match Master for yourself!
 
 **Instructions**
 1. clone the repo
@@ -10,7 +10,7 @@ To try out Match Master for yourself,
 3. run npm install to install dependencies
 4. Install MongoDB on your local machine
 5. run mongod.exe on its default port 27017
-6. spin up the server from the app's root directory with . node server.js
+6. spin up the server from the app's root directory by running "node server.js" in your terminal
 7. point your browser to localhost.3000
 
 **Gameplay**
