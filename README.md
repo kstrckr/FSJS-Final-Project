@@ -7,7 +7,7 @@ To try out Match Master for yourself!
 **Instructions**
 1. clone the repo
 2. cd into the project's root directory
-3. run npm install to install dependencies
+3. run npm install to install dependencies (THIS WILL TAKE FOREVER because Angular)
 4. Install MongoDB on your local machine
 5. run mongod.exe on its default port 27017
 6. spin up the server from the app's root directory by running "node server.js" in your terminal
