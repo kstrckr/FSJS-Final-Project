@@ -6,7 +6,7 @@ To try out Match Master for yourself!
 Match Master is a memory card/concentration style game built on the MEAN stack using Angular
 
 **Instructions**
-1. clone the repo
+1. clone the repo - master branch is the most up to date version
 2. cd into the project's root directory
 3. run npm install to install dependencies (**THIS WILL TAKE FOREVER** because Angular)
 4. Install MongoDB on your local machine
@@ -29,4 +29,4 @@ server.js lives in the root directory, and node modules it requires live in the 
 
 the angular source files are included in src/app and are organized into directories per component plus a single services directory
 
-**the most detailed comments are in ./src/app/game-board/game-board.component with comments for clarity throughout the other component files**
+**the most detailed comments are in ./src/app/game-board/game-board.component with comments for clarity throughout the other component, service, and server files**
