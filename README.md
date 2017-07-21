@@ -12,7 +12,7 @@ Match Master is a memory card/concentration style game built on the MEAN stack u
 4. Install MongoDB on your local machine
 5. run mongod.exe on its default port 27017
 6. spin up the server from the app's root directory by running "node server.js" in your terminal
-7. point your browser to localhost.3000
+7. point your browser to localhost:3000
 
 **Gameplay**
 
