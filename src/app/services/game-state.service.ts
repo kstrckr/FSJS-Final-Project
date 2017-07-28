@@ -19,8 +19,8 @@ export class GameStateService implements OnInit {
     selectedPieces: PieceState[] = [];
 // boardState represents all pieces on the board at each stage of the game cycle
     boardState: PieceState[] = [];
-    postUrl: string = `http://localhost:3000/api/log-score`;
-    putUrl: string = `http://localhost:3000/api/win`;
+    postUrl: string = `/api/log-score`;
+    putUrl: string = `/api/win`;
 
     constructor( private http: Http) {};
 

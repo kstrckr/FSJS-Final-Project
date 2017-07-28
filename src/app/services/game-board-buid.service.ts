@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 export class GameBoardBuildService {
 
-    url: string = 'http://localhost:3000/api/build-board'
+    url: string = '/api/build-board'
     numOfPieces: number;
     gameBoard: GameBoard;
 
