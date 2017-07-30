@@ -13,7 +13,7 @@ import { LeaderBoardEntry } from '../models/leader-board';
 
 export class LeaderBoardComponent implements OnInit {
 
-    url: string = `http://localhost:3000/api/high-scores`;
+    url: string = `/api/high-scores`;
     score = this.gameStateService.currentScore;
     player = this.gameStateService.playerInitials;
     leaderBoard: LeaderBoardEntry[];
