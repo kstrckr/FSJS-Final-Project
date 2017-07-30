@@ -46,7 +46,7 @@ export class LeaderBoardComponent implements OnInit {
                     this.congratulations = `Sorry ${this.player}, Match Mastery remains elusive`;
                 }
 
-                console.log(this.leaderBoard);
+                // console.log(this.leaderBoard);
             })
     }
 

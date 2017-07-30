@@ -85,7 +85,7 @@ export class GameStateService implements OnInit {
     }
 
     updateBoardWithWinTime(): Promise<any> {
-        console.log(this.boardId);
+        // console.log(this.boardId);
         const body = {
             id: this.boardId
         }
