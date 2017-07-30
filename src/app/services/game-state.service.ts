@@ -26,8 +26,8 @@ export class GameStateService implements OnInit {
 
 // called from game-board.components (click)="getTileValue()"
     getTileContents(boardId, tileIndex): Promise<string> {
-        const url = 'http://localhost:3000';
-        const fullUrl = `${url}/api/checkmatch/${boardId}/${tileIndex}`;
+        // const url = 'http://localhost:3000';
+        const fullUrl = `/api/checkmatch/${boardId}/${tileIndex}`;
         return this.http.get(fullUrl)
             .toPromise()
             .then(res => {
