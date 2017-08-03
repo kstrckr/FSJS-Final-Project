@@ -1,3 +1,11 @@
+.bit-button {
+    display: block;
+    margin: 15px auto;
+    padding: 10px;
+    font-family : inherit;
+    background: none;
+}
+
 .leader-board-container {
     margin: 0 auto;
     padding: 0;

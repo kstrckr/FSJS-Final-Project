@@ -1,4 +1,14 @@
 <h1>{{congratulations}}</h1>
+<button 
+    type="submit"
+    (click)="restartNewGame(true)"
+    class="bit-button"
+>Try Again {{player}}!!! </button>
+<button 
+    type="submit"
+    (click)="restartNewGame(false)"
+    class="bit-button"
+>New Player, Start!!!</button>
 <ul class="leader-board-container">
     <li *ngFor="let player of leaderBoard; let i = index"
     class="leader-board">

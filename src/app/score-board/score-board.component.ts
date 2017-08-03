@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class ScoreBoardComponent implements OnInit {
     matchesRemaining = 12;
     score: number = 5;
+    player: string = this.gameStateService.playerInitials;
     subscription: Subscription;
 
     constructor(private gameStateService: GameStateService) {

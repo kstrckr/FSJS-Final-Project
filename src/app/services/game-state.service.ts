@@ -125,6 +125,12 @@ export class GameStateService implements OnInit {
         // console.log(this.boardState);
     }
 
+    resetEntireBoard() {
+        console.log(this.boardState);
+        this.boardState = [];
+        this.currentScore = 0;
+    }
+
     ngOnInit(): void {
     }
 

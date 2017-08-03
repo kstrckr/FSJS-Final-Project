@@ -112,12 +112,17 @@ The core cycle of the game, each click advances the game state by 1 full cycle
 
 // builds the board when the app first starts
     ngOnInit(): void {
+        if (this.gameStateService.boardState.length > 0) {
+            this.gameStateService.resetEntireBoard();
+        }
         this.buildBoard();
+        console.log('OnInit')
     }
 
 
 // returns a queryList of all gamePieces' HTML counterparts so that the inner values can be set and cleared each game cycle
     ngAfterViewInit() {
+        console.log('AfterViewInit')
          this.gamePieces.changes.subscribe(
              (r) => {
                 this.piecesInDom = this.gamePieces.toArray();

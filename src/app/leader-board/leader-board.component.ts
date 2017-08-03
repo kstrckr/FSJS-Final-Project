@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { GameStateService } from '../services/game-state.service';
 import { LeaderBoardEntry } from '../models/leader-board';
 
@@ -21,8 +22,17 @@ export class LeaderBoardComponent implements OnInit {
     
 
     constructor(private http: Http,
-                private gameStateService: GameStateService) { };
+                private router: Router,
+                private gameStateService: GameStateService,) { };
 
+    restartNewGame(initials = false): void {
+        this.gameStateService.currentScoreSource.next(0);
+        if (initials) {
+            this.router.navigateByUrl('/match-master');
+        } else {
+            this.router.navigateByUrl('/loading-screen')
+        }
+    }
 /*
         getTopTen() is called OnInit and gets the top 10 score saved to the database,
         prepares them for display, and renders them as a column of <li> elements
