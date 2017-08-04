@@ -6,6 +6,10 @@
     background: none;
 }
 
+.bit-button:hover {
+    background-color: lightgray;
+}
+
 .leader-board-container {
     margin: 0 auto;
     padding: 0;

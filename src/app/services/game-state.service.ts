@@ -126,7 +126,6 @@ export class GameStateService implements OnInit {
     }
 
     resetEntireBoard() {
-        console.log(this.boardState);
         this.boardState = [];
         this.currentScore = 0;
     }

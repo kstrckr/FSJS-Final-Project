@@ -116,13 +116,11 @@ The core cycle of the game, each click advances the game state by 1 full cycle
             this.gameStateService.resetEntireBoard();
         }
         this.buildBoard();
-        console.log('OnInit')
     }
 
 
 // returns a queryList of all gamePieces' HTML counterparts so that the inner values can be set and cleared each game cycle
     ngAfterViewInit() {
-        console.log('AfterViewInit')
          this.gamePieces.changes.subscribe(
              (r) => {
                 this.piecesInDom = this.gamePieces.toArray();
