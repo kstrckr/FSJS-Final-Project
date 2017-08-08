@@ -5,8 +5,56 @@
 // PlayerScoreSchema defines a single score from a single game tied to the initials entered by the user
 
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const allCodes = require('./unicodes');
 var Schema = mongoose.Schema;
+
+//User schema
+const UserSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+
+    password: {
+        type: String,
+        required: true
+    }
+
+})
+
+UserSchema.static.authenticate = function(username, password, callback) {
+    User.findOne( {email: email })
+        .exec(function(error, user) {
+            if (error) {
+                return callback(error);
+            } else if (!user ) {
+                let err = new Error('User not found.');
+                err.status = 401;
+                return callback(err);
+            }
+            bcrypt.compare(password, user.password, function(error, result) {
+                if (result === true) {
+                    return callback(null, user);
+                } else {
+                    return callback();
+                }
+            })
+        })
+}
+
+UserSchema.pre('save', function(next) {
+    let user = this;
+    bcrypt.hash(user.password, 10, function(err, hash) {
+        if (err) {
+            return next(err);
+        }
+        user.password = hash;
+        next;
+    })
+});
 
 const MatchGameSchema = new Schema({
     createdAt: {type: Date, default: Date.now},
@@ -39,6 +87,9 @@ MatchGameSchema.methods.generateBoard = function(length){
     this.length = length
     this.gameTiles = output;
 }
+
+
+
 
 const NewLevel = mongoose.model('NewLevel', MatchGameSchema);
 const ScoreRecord = mongoose.model('ScoreRecord', PlayerScoreSchema)
