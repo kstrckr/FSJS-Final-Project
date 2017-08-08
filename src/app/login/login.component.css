@@ -1,0 +1,15 @@
+.login-form {
+    margin: 15px;
+}
+
+.bit-button {
+    display: block;
+    margin: 15px auto;
+    padding: 10px;
+    font-family : inherit;
+    background: none;
+}
+
+.bit-button:hover {
+    background-color: lightgray;
+}

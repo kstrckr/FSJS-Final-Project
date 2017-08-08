@@ -16,6 +16,10 @@ export class LoadingScreenComponent {
         private gameStateService: GameStateService,
         private router: Router) {};
 
+    gotoLogin() {
+        this.router.navigateByUrl('/login');
+    }
+
     saveInitials() {
        this.gameStateService.playerInitials = this.initials
        console.log(this.gameStateService.playerInitials);

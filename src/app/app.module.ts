@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GameSpaceComponent } from './game-space/game-space.component';
+import { LoginComponent } from './login/login.component';
 import { ScoreBoardComponent } from './score-board/score-board.component';
 import { GameBoardComponent } from './game-board/game-board.component';
 import { GameStateService } from './services/game-state.service'
@@ -18,6 +19,7 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
   declarations: [
     AppComponent,
     GameSpaceComponent,
+    LoginComponent,
     GameBoardComponent,
     ScoreBoardComponent,
     LeaderBoardComponent,
@@ -30,6 +32,10 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     RouterModule.forRoot([
       {
         path: '', redirectTo: '/loading-screen', pathMatch: 'full'
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       },
       {
         path: 'loading-screen',

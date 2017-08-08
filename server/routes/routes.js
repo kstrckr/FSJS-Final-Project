@@ -12,6 +12,21 @@ const User = require('../models/models').User
 const seedFiles = require('../models/high-scores-seed.json');
 const db = mongoose.connection;
 
+router.post('/login', function(req, res, next) {
+    if (req.body.username && req.body.password) {
+        User.authenticate(req.body.username, req.body.password, function(error, user) {
+            if (error || !user) {
+                let err = new Error('Wrong Username or password.');
+                err.status = 401;
+                return next(err);
+            } else {
+                req.session.userId = user._id;
+                return res.redirect('/dashboard');
+            }
+        })
+    }
+})
+
 
 //the main route that returns a boards size and ID, and saves the tile values to the database
 // need to change this to PUT, since it's not currently idempotent
