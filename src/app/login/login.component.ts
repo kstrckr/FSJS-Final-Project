@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -7,5 +9,12 @@ import { Component } from '@angular/core';
 })
 
 export class LoginComponent {
-    instructions: string = 'Login to dashboard'
+    instructions: string = 'Login to dashboard';
+
+    constructor( private http: Http,
+                private router: Router) { };
+
+    authenticate() {
+        console.log('click');
+    }
 }

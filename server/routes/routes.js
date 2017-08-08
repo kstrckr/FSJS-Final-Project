@@ -21,7 +21,7 @@ router.post('/login', function(req, res, next) {
                 return next(err);
             } else {
                 req.session.userId = user._id;
-                return res.redirect('/dashboard');
+                console.log('user authenticated');
             }
         })
     }
@@ -113,6 +113,7 @@ router.get("/checkmatch/:_id/:a/:b?", function(req, res, next){
         res.json(data.gameTiles[tileA]);
     })
 })
+
 
 module.exports = router;
 
