@@ -9,6 +9,7 @@ const app = express();
 const mongoose = require('mongoose');
 const jsonParser = require('body-parser').json;
 const path = require('path');
+const session = require('express-session');
 
 const routes = require('./server/routes/routes');
 
@@ -24,6 +25,12 @@ db.once('open', function(){
 })
 
 app.use(jsonParser());
+
+app.use(session({
+    secret: 'Master the Match',
+    resave: true,
+    saveUninitialized: false
+}))
 
 // static directory setup
 app.use(express.static(path.join(__dirname, 'dist')))
