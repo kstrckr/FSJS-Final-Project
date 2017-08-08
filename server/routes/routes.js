@@ -14,7 +14,7 @@ const db = mongoose.connection;
 
 
 //the main route that returns a boards size and ID, and saves the tile values to the database
-
+// need to change this to PUT, since it's not currently idempotent
 router.get("/build-board", function(req, res, next){
     const level1 = new NewLevel();
     level1.generateBoard(12);
