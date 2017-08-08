@@ -14,7 +14,8 @@ const routes = require('./server/routes/routes');
 
 const config = require('./server/config');
 
-mongoose.connect("mongodb://localhost:27017/sandbox")
+mongoose.connect(process.env.MONGO_URL || "mongodb://localhost:27017/sandbox")
+mongoose.connection.on('error', console.error.bind(console, 'Mongo error:'))
 
 //connects to mongodb
 const db = mongoose.connection
