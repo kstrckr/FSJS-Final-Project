@@ -92,7 +92,8 @@ MatchGameSchema.methods.generateBoard = function(length){
 
 
 const NewLevel = mongoose.model('NewLevel', MatchGameSchema);
-const ScoreRecord = mongoose.model('ScoreRecord', PlayerScoreSchema)
+const ScoreRecord = mongoose.model('ScoreRecord', PlayerScoreSchema);
+const User = mongoose.model('User', UserSchema);
 
 
 //module.exports.level1 = level1;

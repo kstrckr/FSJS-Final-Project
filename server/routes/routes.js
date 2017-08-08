@@ -8,20 +8,14 @@ const mongoose = require('mongoose');
 const level1 = require('../models/models').level1;
 const NewLevel = require('../models/models').NewLevel;
 const ScoreRecord = require('../models/models').ScoreRecord;
+const User = require('../models/models').User
 const seedFiles = require('../models/high-scores-seed.json');
 const db = mongoose.connection;
 
-/*
-router.get("/", function(req, res, next){
-    res.render('index', { title: 'Hey', message: 'Hello there!' });
-})
-*/
 
 //the main route that returns a boards size and ID, and saves the tile values to the database
 
 router.get("/build-board", function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const level1 = new NewLevel();
     level1.generateBoard(12);
     let boardIngredients = {};
@@ -37,10 +31,6 @@ router.get("/build-board", function(req, res, next){
 // Posts the score of the user after winning a game
 
 router.post("/log-score", function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-    
     const initials = req.body.initials;
     const score = req.body.score;
     const boardId = req.body.boardId;
@@ -51,10 +41,6 @@ router.post("/log-score", function(req, res, next){
         boardId: boardId
     });
 
- 
-    //console.log(highScore);
-
-
     highScore.save(function(err){
         if (err) return console.error(err);
     })
@@ -64,9 +50,6 @@ router.post("/log-score", function(req, res, next){
 // Updates the board's status on the server as having been won by a player
 
 router.put("/win", function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
     const id = req.body.id;
     NewLevel.findOne({"_id": id}, function(err, board){
         if (err) console.error(err);
@@ -84,11 +67,7 @@ router.put("/win", function(req, res, next){
 // the organized top 10 will include the user's latest score if they played well enough
 
 router.get('/high-scores/', function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
     ScoreRecord.find({}, function(err, scores){
-
         scores.sort((a, b) => a.score - b.score)
         res.json(scores.slice(0,10));
         if (scores.length > 10){
@@ -104,9 +83,6 @@ router.get('/high-scores/', function(req, res, next){
 //returns the value of a tile when clicked by the player, this ensures that tile values aren't exposed to the client until clicked on in real time
 
 router.get("/checkmatch/:_id/:a/:b?", function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
     NewLevel.findOne({"_id": req.params._id}, function(err, data){
         if(err) console.error(err)
         let tileA = req.params.a;
@@ -130,6 +106,8 @@ this counts and fills in the database with enough seeded data to
 generate a full top 10 leaderboard when the server is spun up
 */
 
+/*
+disabled 08.07 now that database is live
 ScoreRecord.count({}, function( err, count){
     console.log(count);
     if (count <= 10) {
@@ -141,3 +119,4 @@ ScoreRecord.count({}, function( err, count){
         })
     }
 })
+*/
